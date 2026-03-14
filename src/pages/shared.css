@@ -1,0 +1,106 @@
+/* Shared page and table styles - scoped to .rbac-page and .rbac-table */
+
+.rbac-page__header {
+  margin-bottom: 0.25rem;
+}
+
+.rbac-page__title {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--rbac-page-title, #e8eaed);
+}
+
+.rbac-page__subtitle {
+  margin: 0.25rem 0 0;
+  font-size: 0.9375rem;
+  color: var(--rbac-page-subtitle, #9aa0a6);
+}
+
+/* Shared table */
+.rbac-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+
+.rbac-table th,
+.rbac-table td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--rbac-table-row-border, #3d4250);
+}
+
+.rbac-table th {
+  font-weight: 600;
+  color: var(--rbac-table-th, #9aa0a6);
+  background-color: var(--rbac-table-th-bg, rgba(0, 0, 0, 0.2));
+}
+
+.rbac-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.rbac-table__empty {
+  color: var(--rbac-table-empty, #9aa0a6);
+  font-style: italic;
+  padding: 2rem 1rem;
+  text-align: center;
+}
+
+/* Shared button - used in toolbars */
+.rbac-btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.rbac-btn--primary {
+  background-color: var(--rbac-btn-primary-bg, #8ab4f8);
+  color: var(--rbac-btn-primary-color, #202124);
+  border-color: var(--rbac-btn-primary-border, #8ab4f8);
+}
+
+.rbac-btn--primary:hover {
+  background-color: var(--rbac-btn-primary-hover-bg, #a8c7fa);
+  border-color: var(--rbac-btn-primary-hover-border, #a8c7fa);
+}
+
+@media (prefers-color-scheme: light) {
+  .rbac-page__title {
+    --rbac-page-title: #202124;
+  }
+
+  .rbac-page__subtitle {
+    --rbac-page-subtitle: #5f6368;
+  }
+
+  .rbac-table th,
+  .rbac-table td {
+    --rbac-table-row-border: #e8eaed;
+  }
+
+  .rbac-table th {
+    --rbac-table-th: #5f6368;
+    --rbac-table-th-bg: #f8f9fa;
+  }
+
+  .rbac-table__empty {
+    --rbac-table-empty: #5f6368;
+  }
+
+  .rbac-btn--primary {
+    --rbac-btn-primary-bg: #1a73e8;
+    --rbac-btn-primary-color: #ffffff;
+    --rbac-btn-primary-border: #1a73e8;
+  }
+
+  .rbac-btn--primary:hover {
+    --rbac-btn-primary-hover-bg: #1765cc;
+    --rbac-btn-primary-hover-border: #1765cc;
+  }
+}

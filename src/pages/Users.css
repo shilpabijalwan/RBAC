@@ -1,0 +1,20 @@
+/* Users page - scoped to .rbac-users */
+
+.rbac-users__toolbar {
+  margin-top: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.rbac-users__table-wrap {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid var(--rbac-table-border, #3d4250);
+  background-color: var(--rbac-table-bg, #2d323d);
+}
+
+@media (prefers-color-scheme: light) {
+  .rbac-users__table-wrap {
+    --rbac-table-border: #dadce0;
+    --rbac-table-bg: #ffffff;
+  }
+}
