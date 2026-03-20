@@ -1,14 +1,9 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-
 const baseQuery = fetchBaseQuery({
-  baseUrl: import.meta.env.VITE_API_BASE_URL || "http://localhost:7000/",
-  prepareHeaders: (headers) => {
-    const token = undefined; // e.g. from localStorage or auth slice
-    if (token) {
-      headers.set("Authorization", `Bearer ${token}`);
-    }
-    headers.set("Content-Type", "application/json");
-    return headers;
+  baseUrl: import.meta.env.VITE_API_BASE_URL || "/api/admin",
+  credentials: "include",
+  headers: {
+    "Content-Type": "application/json",
   },
 });
 

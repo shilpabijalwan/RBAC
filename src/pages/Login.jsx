@@ -1,38 +1,42 @@
-import { useCallback } from 'react';
-import { Link, useNavigate, useLocation, Navigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { setCredentials, selectIsAuthenticated } from '../store/slices/authSlice';
-import Button from '../components/Button';
-import './Auth.css';
+import { useLocation, useNavigate } from "react-router-dom";
+import Button from "../components/Button";
+import "./Auth.css";
+import { useLoginMutation } from "../store/services/AuthServices";
+import { setCredentials } from "../store/slices/authSlice";
+import { useDispatch } from "react-redux";
 
 const inputClass =
-  'w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-zinc-900 placeholder-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder-zinc-500';
+  "w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-zinc-900 placeholder-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder-zinc-500";
 
 function Login() {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
   const location = useLocation();
-  const isAuthenticated = useSelector(selectIsAuthenticated);
-  const from = location.state?.from?.pathname ?? '/';
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const from = location.state?.from?.pathname ?? "/";
 
-  if (isAuthenticated) {
-    return <Navigate to={from || '/'} replace />;
-  }
+  const [login] = useLoginMutation();
 
-  const handleSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
       const form = e.target;
       const formData = new FormData(form);
-      const email = formData.get('email') ?? '';
-      const password = formData.get('password') ?? '';
-      // TODO: replace with real auth API response token/user
-      const token = btoa(JSON.stringify({ email, password }));
-      dispatch(setCredentials({ token, user: { email } }));
-      navigate(from, { replace: true });
-    },
-    [dispatch, navigate, from]
-  );
+      const email = formData.get("email") ?? "";
+      const password = formData.get("password") ?? "";
+      const response = await login({ email, password }).unwrap();
+      console.log("response", response);
+      dispatch(setCredentials({ user: response.user }));
+      if (response.user.uuid) {
+        navigate(from || "/roles", { replace: true });
+      } else {
+        // toast.error("Invalid credentials");
+        console.log("Invalid credentials");
+      }
+    } catch (error) {
+      console.error(error);
+      // toast.error(error.data.message);
+    }
+  };
 
   return (
     <div className="auth-page">
@@ -72,12 +76,12 @@ function Login() {
           </Button>
         </form>
 
-        <p className="auth-footer">
+        {/* <p className="auth-footer">
           Don&apos;t have an account?{' '}
           <Link to="/signup" className="auth-link">
             Sign up
           </Link>
-        </p>
+        </p> */}
       </div>
     </div>
   );
