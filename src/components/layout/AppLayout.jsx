@@ -3,13 +3,24 @@ import { NavLink } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { logout as logoutAction, selectCurrentUser } from "../../store/slices/authSlice";
+import {
+  logout as logoutAction,
+  selectCurrentUser,
+  setCredentials,
+} from "../../store/slices/authSlice";
 import "../../pages/shared.css";
 import "./AppLayout.css";
-import { useLogoutMutation } from "../../store/services/AuthServices";
+import {
+  useGetAvailableRolesQuery,
+  useLogoutMutation,
+  useUpdateProfileMutation,
+  useUpdateProfileRolesMutation,
+} from "../../store/services/AuthServices";
+import UpdateProfileSideSheet from "../UpdateProfileSideSheet";
 
 function AppLayout() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isProfileSheetOpen, setIsProfileSheetOpen] = useState(false);
   const userMenuRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -17,6 +28,9 @@ function AppLayout() {
   const userName = currentUser?.name || currentUser?.fullName || "User";
   const userEmail = currentUser?.email || "user@example.com";
   const [logout] = useLogoutMutation();
+  const [updateProfile] = useUpdateProfileMutation();
+  const [updateProfileRoles] = useUpdateProfileRolesMutation();
+  const { data: rolesResponse } = useGetAvailableRolesQuery();
   const initials =
     userName
       .split(" ")
@@ -47,6 +61,44 @@ function AppLayout() {
     } finally {
       dispatch(logoutAction());
       navigate("/login", { replace: true });
+    }
+  };
+
+  const handleOpenProfileSheet = () => {
+    setIsUserMenuOpen(false);
+    setIsProfileSheetOpen(true);
+  };
+
+  const handleProfileUpdate = async (payload) => {
+    try {
+      const response = await updateProfile(payload).unwrap();
+      const updatedUser = response?.user ?? response?.data?.user;
+      if (updatedUser) {
+        dispatch(setCredentials({ user: updatedUser }));
+      }
+    } catch (error) {
+      console.log("profile update error", error);
+    }
+  };
+
+  const handleProfileRolesUpdate = async (payload) => {
+    try {
+      const response = await updateProfileRoles(payload).unwrap();
+      const updatedUser = response?.user ?? response?.data?.user;
+      if (updatedUser) {
+        dispatch(setCredentials({ user: updatedUser }));
+      } else {
+        dispatch(
+          setCredentials({
+            user: {
+              ...currentUser,
+              roles: payload.roles,
+            },
+          }),
+        );
+      }
+    } catch (error) {
+      console.log("roles update error", error);
     }
   };
 
@@ -126,6 +178,7 @@ function AppLayout() {
                 type="button"
                 className="rbac-user-menu__item"
                 role="menuitem"
+                onClick={handleOpenProfileSheet}
               >
                 Update profile
               </button>
@@ -150,6 +203,14 @@ function AppLayout() {
         <section className="rbac-content">
           <Outlet />
         </section>
+        <UpdateProfileSideSheet
+          open={isProfileSheetOpen}
+          onClose={() => setIsProfileSheetOpen(false)}
+          currentUser={currentUser}
+          availableRoles={rolesResponse?.roles ?? rolesResponse?.data ?? []}
+          onSubmitProfile={handleProfileUpdate}
+          onSubmitRoles={handleProfileRolesUpdate}
+        />
       </main>
     </div>
   );

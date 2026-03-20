@@ -31,7 +31,38 @@ export const authApi = createApi({
       }),
       invalidatesTags: [{ type: "Auth" }],
     }),
+    getAvailableRoles: builder.query({
+      query: () => ({
+        url: "/roles",
+        method: "GET",
+      }),
+      transformResponse: (response) => response,
+    }),
+    updateProfile: builder.mutation({
+      query: (body) => ({
+        url: "/profile",
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: [{ type: "Auth" }],
+      transformResponse: (response) => response,
+    }),
+    updateProfileRoles: builder.mutation({
+      query: (body) => ({
+        url: "/profile/roles",
+        method: "PATCH",
+        body,
+      }),
+      invalidatesTags: [{ type: "Auth" }],
+      transformResponse: (response) => response,
+    }),
   }),
 });
 
-export const { useLoginMutation, useLogoutMutation } = authApi;
+export const {
+  useLoginMutation,
+  useLogoutMutation,
+  useGetAvailableRolesQuery,
+  useUpdateProfileMutation,
+  useUpdateProfileRolesMutation,
+} = authApi;
