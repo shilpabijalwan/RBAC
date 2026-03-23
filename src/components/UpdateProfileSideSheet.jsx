@@ -1,6 +1,15 @@
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Button from "./Button";
 import CloseButton from "./CloseButton";
+
+function getInitialRoleIds(user) {
+  if (!user) return [];
+  const roles = user?.roles || user?.role || [];
+  if (Array.isArray(roles)) {
+    return roles.map((r) => (typeof r === "string" ? r : r.id ?? r.name)).filter(Boolean);
+  }
+  return typeof roles === "string" ? [roles] : [];
+}
 
 function UpdateProfileSideSheet({
   open,
@@ -11,7 +20,7 @@ function UpdateProfileSideSheet({
   onSubmitRoles,
 }) {
   const [activeTab, setActiveTab] = useState("profile");
-  const [selectedRoles, setSelectedRoles] = useState([]);
+  const [selectedRoles, setSelectedRoles] = useState(() => getInitialRoleIds(currentUser));
 
   const resolvedRoles = useMemo(() => {
     const source = availableRoles?.length ? availableRoles : ["Admin", "Editor", "Viewer"];
@@ -19,19 +28,6 @@ function UpdateProfileSideSheet({
       typeof role === "string" ? { id: role, label: role } : { id: role.id ?? role.name, label: role.name ?? role.id },
     );
   }, [availableRoles]);
-
-  const currentUserRoleIds = useMemo(() => {
-    const roles = currentUser?.roles || currentUser?.role || [];
-    if (Array.isArray(roles)) {
-      return roles.map((r) => (typeof r === "string" ? r : r.id ?? r.name)).filter(Boolean);
-    }
-    return typeof roles === "string" ? [roles] : [];
-  }, [currentUser]);
-
-  const handleOpen = useCallback(() => {
-    setActiveTab("profile");
-    setSelectedRoles(currentUserRoleIds);
-  }, [currentUserRoleIds]);
 
   const handleClose = useCallback(() => {
     onClose();
@@ -65,13 +61,6 @@ function UpdateProfileSideSheet({
     handleClose();
   }, [handleClose, onSubmitRoles, selectedRoles]);
 
-  // Sync state each time side sheet opens.
-  useEffect(() => {
-    if (open) {
-      handleOpen();
-    }
-  }, [open, handleOpen]);
-
   return (
     <>
       <div
@@ -86,7 +75,7 @@ function UpdateProfileSideSheet({
         aria-modal="true"
         aria-hidden={!open}
         aria-labelledby="update-profile-sheet-title"
-        className={`fixed inset-y-0 right-0 z-50 flex w-full max-w-md flex-col bg-white shadow-xl transition-transform duration-200 ease-out dark:bg-zinc-900 ${open ? "translate-x-0" : "pointer-events-none translate-x-full"}`}
+        className={`fixed inset-y-0 right-0 z-50 flex w-full max-w-[600px] flex-col bg-white shadow-xl transition-transform duration-200 ease-out dark:bg-zinc-900 ${open ? "translate-x-0" : "pointer-events-none translate-x-full"}`}
       >
         <div className="flex items-center justify-between border-b border-zinc-200 px-6 py-4 dark:border-zinc-700">
           <h2

@@ -21,6 +21,7 @@ import UpdateProfileSideSheet from "../UpdateProfileSideSheet";
 function AppLayout() {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isProfileSheetOpen, setIsProfileSheetOpen] = useState(false);
+  const [profileSheetKey, setProfileSheetKey] = useState(0);
   const userMenuRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -66,6 +67,7 @@ function AppLayout() {
 
   const handleOpenProfileSheet = () => {
     setIsUserMenuOpen(false);
+    setProfileSheetKey((k) => k + 1);
     setIsProfileSheetOpen(true);
   };
 
@@ -204,6 +206,7 @@ function AppLayout() {
           <Outlet />
         </section>
         <UpdateProfileSideSheet
+          key={profileSheetKey}
           open={isProfileSheetOpen}
           onClose={() => setIsProfileSheetOpen(false)}
           currentUser={currentUser}

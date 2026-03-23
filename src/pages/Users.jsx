@@ -1,5 +1,7 @@
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import AddUserSideSheet from "../components/AddUserSideSheet";
+import RbacRowActionsMenu from "../components/RbacRowActionsMenu";
+import RbacTable from "../components/RbacTable";
 import "./Users.css";
 import { useCreateUserMutation, useGetUsersQuery } from "../store/services/api";
 
@@ -13,6 +15,42 @@ function Users() {
     await createUser(data);
     // setAddUserSheetOpen(false);
   };
+
+  const handleEditUser = useCallback((row) => {
+    console.log("Edit user", row);
+  }, []);
+
+  const handleDeleteUser = useCallback((row) => {
+    console.log("Delete user", row);
+  }, []);
+
+  const userColumns = useMemo(
+    () => [
+      { id: "name", header: "User", accessor: "name" },
+      { id: "email", header: "Email", accessor: "email" },
+      {
+        id: "roles",
+        header: "Roles",
+        render: (row) => (
+          <div className="rbac-table__role-pills">
+            {row.roles?.map((role) => (
+              <span key={role} className="rbac-table__role-pill">
+                {role}
+              </span>
+            ))}
+          </div>
+        ),
+      },
+      {
+        id: "actions",
+        header: "Actions",
+        render: (row) => (
+          <RbacRowActionsMenu row={row} onEdit={handleEditUser} onDelete={handleDeleteUser} />
+        ),
+      },
+    ],
+    [handleDeleteUser, handleEditUser],
+  );
 
   return (
     <div className="rbac-page rbac-users">
@@ -29,56 +67,14 @@ function Users() {
           Add user
         </button>
       </div>
-      <div className="rbac-users__table-wrap">
-        <table className="rbac-table">
-          <thead>
-            <tr>
-              <th>User</th>
-              <th>Email</th>
-              <th>Roles</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users?.users?.map((item) => (
-              <tr key={item.id}>
-                <td>{item.name}</td>
-                <td>{item.email}</td>
-                <td>
-                  <div className="flex gap-2">
-                    {item.roles?.map((role) => (
-                      <span
-                        key={role}
-                        className="rounded-full px-2 py-1 border border-gray-300 max-w-fit text-xs bg-blue-100 text-black"
-                      >
-                        {role}
-                      </span>
-                    ))}
-                  </div>
-                </td>
-                <td className="flex gap-10">
-                  <button className="rbac-btn rbac-btn--primary">Edit</button>
-                  <button className="">Delete</button>
-                </td>
-              </tr>
-            ))}
-            {isLoading && (
-              <tr>
-                <td colSpan={4} className="rbac-table__empty">
-                  Loading...
-                </td>
-              </tr>
-            )}
-            {!users?.users?.length && (
-              <tr>
-                <td colSpan={4} className="rbac-table__empty">
-                  No users yet. Add a user and assign roles.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </table>
-      </div>
+      <RbacTable
+        columns={userColumns}
+        data={users?.users ?? []}
+        getRowKey={(row) => row.id}
+        isLoading={isLoading}
+        emptyMessage="No users yet. Add a user and assign roles."
+        loadingMessage="Loading..."
+      />
 
       <AddUserSideSheet
         open={addUserSheetOpen}

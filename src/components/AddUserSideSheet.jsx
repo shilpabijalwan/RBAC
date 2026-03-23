@@ -26,7 +26,7 @@ function AddUserSideSheet({ open, onClose, onSubmit }) {
       {/* Backdrop */}
       <div
         role="presentation"
-        className={`fixed inset-0 z-40 bg-black/50 transition-opacity duration-200 ease-out ${open ? "opacity-100" : "pointer-events-none opacity-0"}`}
+        className={`fixed inset-0 z-40 bg-black/40 backdrop-blur-md transition-opacity duration-200 ease-out ${open ? "opacity-100" : "pointer-events-none opacity-0"}`}
         aria-hidden={!open}
         onClick={onClose}
       />
@@ -37,7 +37,7 @@ function AddUserSideSheet({ open, onClose, onSubmit }) {
         aria-modal="true"
         aria-hidden={!open}
         aria-labelledby="add-user-sheet-title"
-        className={`fixed inset-y-0 right-0 z-50 flex w-full max-w-md flex-col bg-white shadow-xl transition-transform duration-200 ease-out dark:bg-zinc-900 ${open ? "translate-x-0" : "pointer-events-none translate-x-full"}`}
+        className={`fixed inset-y-0 right-0 z-50 flex w-full max-w-[500px] flex-col bg-white shadow-xl transition-transform duration-200 ease-out dark:bg-zinc-900 ${open ? "translate-x-0" : "pointer-events-none translate-x-full"}`}
       >
         <div className="flex items-center justify-between border-b border-zinc-200 px-6 py-4 dark:border-zinc-700">
           <h2

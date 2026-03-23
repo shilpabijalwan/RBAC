@@ -1,0 +1,40 @@
+/* RbacTable shell – scoped to .rbac-table-wrap */
+
+.rbac-table-wrap {
+  overflow-x: auto;
+  border-radius: 8px;
+  border: 1px solid var(--rbac-table-border, #3d4250);
+  background-color: var(--rbac-table-bg, #2d323d);
+}
+
+.rbac-table__role-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.rbac-table__role-pill {
+  display: inline-block;
+  max-width: max-content;
+  padding: 0.125rem 0.5rem;
+  font-size: 0.75rem;
+  line-height: 1.25;
+  font-weight: 500;
+  color: var(--rbac-role-pill-text, #e8eaed);
+  background-color: var(--rbac-role-pill-bg, #394867);
+  border: 1px solid var(--rbac-role-pill-border, #5f6f9a);
+  border-radius: 999px;
+}
+
+@media (prefers-color-scheme: light) {
+  .rbac-table-wrap {
+    --rbac-table-border: #dadce0;
+    --rbac-table-bg: #ffffff;
+  }
+
+  .rbac-table__role-pill {
+    --rbac-role-pill-text: #174ea6;
+    --rbac-role-pill-bg: #d2e3fc;
+    --rbac-role-pill-border: #aecbfa;
+  }
+}
