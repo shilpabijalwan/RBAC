@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const AUTH_TOKEN_KEY = 'rbac_auth_token';
+const AUTH_USER_KEY = 'rbac_auth_user';
 
 const initialState = {
   token: null,
@@ -21,12 +22,20 @@ const authSlice = createSlice({
           // ignore
         }
       }
+      if (payload.user !== undefined) {
+        try {
+          localStorage.setItem(AUTH_USER_KEY, JSON.stringify(payload.user));
+        } catch {
+          // ignore
+        }
+      }
     },
     logout: (state) => {
       state.token = null;
       state.user = null;
       try {
         localStorage.removeItem(AUTH_TOKEN_KEY);
+        localStorage.removeItem(AUTH_USER_KEY);
       } catch {
         // ignore
       }
@@ -43,6 +52,15 @@ export const selectIsAuthenticated = (state) => Boolean(state.auth.token);
 export const getStoredToken = () => {
   try {
     return localStorage.getItem(AUTH_TOKEN_KEY);
+  } catch {
+    return null;
+  }
+};
+
+export const getStoredUser = () => {
+  try {
+    const raw = localStorage.getItem(AUTH_USER_KEY);
+    return raw ? JSON.parse(raw) : null;
   } catch {
     return null;
   }

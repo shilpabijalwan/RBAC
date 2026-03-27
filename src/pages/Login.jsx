@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 
 const inputClass =
   "w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-zinc-900 placeholder-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder-zinc-500";
+const hasValidUser = (user) => Boolean(user?.uuid || user?.id || user?.email);
 
 function Login() {
   const location = useLocation();
@@ -25,8 +26,9 @@ function Login() {
       const password = formData.get("password") ?? "";
       const response = await login({ email, password }).unwrap();
       console.log("response", response);
-      dispatch(setCredentials({ user: response.user }));
-      if (response.user.uuid) {
+      const resolvedUser = response?.user ?? response?.data?.user ?? null;
+      dispatch(setCredentials({ user: resolvedUser }));
+      if (hasValidUser(resolvedUser)) {
         navigate(from || "/roles", { replace: true });
       } else {
         // toast.error("Invalid credentials");

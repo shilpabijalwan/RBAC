@@ -31,6 +31,14 @@ export const authApi = createApi({
       }),
       invalidatesTags: [{ type: "Auth" }],
     }),
+    getProfile: builder.query({
+      query: () => ({
+        url: "/profile",
+        method: "GET",
+      }),
+      providesTags: [{ type: "Auth" }],
+      transformResponse: (response) => response,
+    }),
     getAvailableRoles: builder.query({
       query: () => ({
         url: "/roles",
@@ -62,6 +70,7 @@ export const authApi = createApi({
 export const {
   useLoginMutation,
   useLogoutMutation,
+  useGetProfileQuery,
   useGetAvailableRolesQuery,
   useUpdateProfileMutation,
   useUpdateProfileRolesMutation,
