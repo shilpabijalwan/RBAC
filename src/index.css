@@ -1,13 +1,33 @@
 @import "tailwindcss";
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Typography */
+  --font-display: "Space Grotesk", "Inter", "Segoe UI", Arial, sans-serif;
+  --font-body: "Inter", "Segoe UI", Arial, sans-serif;
+
+  /* Kinetic Precision palette */
+  --kp-surface: #070d1f;
+  --kp-surface-lowest: #000000;
+  --kp-surface-low: #0f162b;
+  --kp-surface-high: #171f36;
+  --kp-surface-highest: #202a46;
+  --kp-surface-variant-glass: rgba(23, 31, 54, 0.72);
+
+  --kp-primary: #ba9eff;
+  --kp-primary-dim: #8455ef;
+  --kp-secondary: #62fae3;
+  --kp-tertiary: #ff86c3;
+  --kp-error: #ff6b7a;
+
+  --kp-on-surface: #dfe4fe;
+  --kp-on-surface-variant: #a5aac2;
+  --kp-outline-ghost: rgba(65, 71, 91, 0.15);
+
+  font-family: var(--font-body);
   line-height: 1.5;
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color: var(--kp-on-surface);
+  background-color: var(--kp-surface);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -17,51 +37,24 @@
 
 a {
   font-weight: 500;
-  color: #646cff;
+  color: var(--kp-primary);
   text-decoration: inherit;
 }
 a:hover {
-  color: #535bf2;
+  color: #d7c6ff;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background: var(--kp-surface);
+  color: var(--kp-on-surface);
 }
 
 h1 {
-  font-size: 3.2em;
+  font-family: var(--font-display);
+  font-size: 3rem;
   line-height: 1.1;
-}
-
-/* button {
-  border-radius: 8px;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-} */
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  /* button {
-    background-color: #f9f9f9;
-  } */
+  letter-spacing: 0.01em;
 }

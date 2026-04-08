@@ -107,7 +107,10 @@ function AppLayout() {
   return (
     <div className="rbac-layout">
       <aside className="rbac-sidebar">
-        <div className="rbac-sidebar__brand">RBAC</div>
+        <div className="rbac-sidebar__brand-wrap">
+          <div className="rbac-sidebar__brand">PRECISION_OS</div>
+          <p className="rbac-sidebar__tag">Technical Authority</p>
+        </div>
         <nav className="rbac-sidebar__nav">
           <NavLink
             to="/"
@@ -116,6 +119,9 @@ function AppLayout() {
               `rbac-sidebar__link ${isActive ? "rbac-sidebar__link--active" : ""}`
             }
           >
+            <span className="rbac-sidebar__icon" aria-hidden>
+              ▣
+            </span>
             Dashboard
           </NavLink>
           <NavLink
@@ -124,6 +130,9 @@ function AppLayout() {
               `rbac-sidebar__link ${isActive ? "rbac-sidebar__link--active" : ""}`
             }
           >
+            <span className="rbac-sidebar__icon" aria-hidden>
+              ◫
+            </span>
             Roles
           </NavLink>
           <NavLink
@@ -132,6 +141,9 @@ function AppLayout() {
               `rbac-sidebar__link ${isActive ? "rbac-sidebar__link--active" : ""}`
             }
           >
+            <span className="rbac-sidebar__icon" aria-hidden>
+              ◇
+            </span>
             Permissions
           </NavLink>
           <NavLink
@@ -140,65 +152,92 @@ function AppLayout() {
               `rbac-sidebar__link ${isActive ? "rbac-sidebar__link--active" : ""}`
             }
           >
+            <span className="rbac-sidebar__icon" aria-hidden>
+              ◎
+            </span>
             Users
           </NavLink>
         </nav>
+        <div className="rbac-sidebar__footer">
+          <button
+            type="button"
+            className="rbac-sidebar__logout"
+            onClick={handleLogout}
+          >
+            Logout
+          </button>
+        </div>
       </aside>
       <main className="rbac-main">
         <header className="rbac-header">
-          <div className="rbac-header__title-wrap">
-            <h1 className="rbac-header__title">Role Based Access Control</h1>
-            <p className="rbac-header__subtitle">
-              Manage users, roles and permissions
-            </p>
+          <div className="rbac-header__left">
+            <div className="rbac-header__search-wrap">
+              <span className="rbac-header__search-icon" aria-hidden>
+                ⌕
+              </span>
+              <input
+                type="text"
+                className="rbac-header__search"
+                placeholder="COMMAND_SEARCH..."
+              />
+            </div>
           </div>
-          <div className="rbac-header__user-wrap" ref={userMenuRef}>
+          <div className="rbac-header__right">
             <button
               type="button"
-              className="rbac-header__user"
-              onClick={() => setIsUserMenuOpen((prev) => !prev)}
-              aria-haspopup="menu"
-              aria-expanded={isUserMenuOpen}
+              className="rbac-header__notify"
+              aria-label="Notifications"
             >
-              <span className="rbac-header__avatar" aria-hidden>
-                {initials}
-              </span>
-              <span className="rbac-header__user-meta">
-                <span className="rbac-header__user-name">{userName}</span>
-                <span className="rbac-header__user-email">{userEmail}</span>
-              </span>
-              <span className="rbac-header__menu-icon" aria-hidden>
-                ▾
-              </span>
+              <span aria-hidden>◉</span>
             </button>
+            <div className="rbac-header__user-wrap" ref={userMenuRef}>
+              <button
+                type="button"
+                className="rbac-header__user"
+                onClick={() => setIsUserMenuOpen((prev) => !prev)}
+                aria-haspopup="menu"
+                aria-expanded={isUserMenuOpen}
+              >
+                <span className="rbac-header__avatar" aria-hidden>
+                  {initials}
+                </span>
+                <span className="rbac-header__user-meta">
+                  <span className="rbac-header__user-name">{userName}</span>
+                  <span className="rbac-header__user-email">{userEmail}</span>
+                </span>
+                <span className="rbac-header__menu-icon" aria-hidden>
+                  ▾
+                </span>
+              </button>
 
-            <div
-              className={`rbac-user-menu ${isUserMenuOpen ? "rbac-user-menu--open" : ""}`}
-              role="menu"
-            >
-              <button
-                type="button"
-                className="rbac-user-menu__item"
-                role="menuitem"
-                onClick={handleOpenProfileSheet}
+              <div
+                className={`rbac-user-menu ${isUserMenuOpen ? "rbac-user-menu--open" : ""}`}
+                role="menu"
               >
-                Update profile
-              </button>
-              <button
-                type="button"
-                className="rbac-user-menu__item"
-                role="menuitem"
-              >
-                Account settings
-              </button>
-              <button
-                type="button"
-                className="rbac-user-menu__item rbac-user-menu__item--danger"
-                role="menuitem"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
+                <button
+                  type="button"
+                  className="rbac-user-menu__item"
+                  role="menuitem"
+                  onClick={handleOpenProfileSheet}
+                >
+                  Update profile
+                </button>
+                <button
+                  type="button"
+                  className="rbac-user-menu__item"
+                  role="menuitem"
+                >
+                  Account settings
+                </button>
+                <button
+                  type="button"
+                  className="rbac-user-menu__item rbac-user-menu__item--danger"
+                  role="menuitem"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
+              </div>
             </div>
           </div>
         </header>

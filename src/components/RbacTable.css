@@ -2,9 +2,9 @@
 
 .rbac-table-wrap {
   overflow-x: auto;
-  border-radius: 8px;
-  border: 1px solid var(--rbac-table-border, #3d4250);
-  background-color: var(--rbac-table-bg, #2d323d);
+  border-radius: 0;
+  outline: 1px solid var(--rbac-table-border, var(--kp-outline-ghost, rgba(65, 71, 91, 0.15)));
+  background-color: var(--rbac-table-bg, var(--kp-surface-high, #171f36));
 }
 
 .rbac-table__role-pills {
@@ -22,19 +22,6 @@
   font-weight: 500;
   color: var(--rbac-role-pill-text, #e8eaed);
   background-color: var(--rbac-role-pill-bg, #394867);
-  border: 1px solid var(--rbac-role-pill-border, #5f6f9a);
-  border-radius: 999px;
-}
-
-@media (prefers-color-scheme: light) {
-  .rbac-table-wrap {
-    --rbac-table-border: #dadce0;
-    --rbac-table-bg: #ffffff;
-  }
-
-  .rbac-table__role-pill {
-    --rbac-role-pill-text: #174ea6;
-    --rbac-role-pill-bg: #d2e3fc;
-    --rbac-role-pill-border: #aecbfa;
-  }
+  border: none;
+  border-radius: 0;
 }

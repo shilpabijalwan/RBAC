@@ -29,7 +29,28 @@ export const api = createApi({
       }),
       providesTags: [{ type: "User", id: "LIST" }],
     }),
+    createRole: builder.mutation({
+      query: (body) => ({
+        url: "/create-role",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: [{ type: "Role", id: "LIST" }],
+    }),
+    createPermission: builder.mutation({
+      query: (body) => ({
+        url: "/create-permission",
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: [{ type: "Permission", id: "LIST" }],
+    }),
   }),
 });
 
-export const { useCreateUserMutation, useGetUsersQuery } = api;
+export const {
+  useCreateUserMutation,
+  useGetUsersQuery,
+  useCreateRoleMutation,
+  useCreatePermissionMutation,
+} = api;

@@ -4,14 +4,29 @@ import "./Dashboard.css";
 
 function Dashboard() {
   const currentUser = useSelector(selectCurrentUser);
-  console.log(currentUser , "currentUser");
+  console.log(currentUser, "currentUser");
   return (
     <div className="rbac-page rbac-dashboard">
-      <header className="rbac-page__header">
-        <h1 className="rbac-page__title">Dashboard</h1>
-        <p className="rbac-page__subtitle">
-          Overview of roles, permissions, and users
-        </p>
+      <header className="rbac-dashboard__hero">
+        <div className="rbac-dashboard__hero-content">
+          <h1 className="rbac-dashboard__hero-title">
+            Team{" "}
+            <span className="rbac-dashboard__hero-highlight">Velocity</span>{" "}
+            Index
+          </h1>
+          <p className="rbac-dashboard__hero-subtitle">
+            Operational oversight of access architecture, role distribution and
+            permission lifecycle.
+          </p>
+        </div>
+        <div className="rbac-dashboard__hero-cta">
+          <button type="button" className="rbac-btn rbac-btn--primary">
+            Initiate Report
+          </button>
+          <button type="button" className="rbac-dashboard__ghost-btn">
+            Configure View
+          </button>
+        </div>
       </header>
       <div className="rbac-dashboard__grid">
         <section className="rbac-dashboard__card">
