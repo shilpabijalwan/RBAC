@@ -10,15 +10,15 @@
 }
 
 .rbac-dashboard__hero-content {
-  max-width: 760px;
+  max-width: 720px;
 }
 
 .rbac-dashboard__hero-title {
   margin: 0;
   font-family: var(--font-display, "Space Grotesk", sans-serif);
   text-transform: uppercase;
-  font-size: clamp(2rem, 5vw, 3.2rem);
-  line-height: 0.96;
+  font-size: clamp(2rem, 4.8vw, 3.15rem);
+  line-height: 0.98;
   letter-spacing: -0.02em;
   color: var(--kp-on-surface, #dfe4fe);
 }
@@ -28,10 +28,10 @@
 }
 
 .rbac-dashboard__hero-subtitle {
-  margin: 1rem 0 0;
-  max-width: 600px;
+  margin: 0.9rem 0 0;
   color: var(--kp-on-surface-variant, #a5aac2);
-  font-size: 0.9rem;
+  font-size: 0.84rem;
+  line-height: 1.6;
 }
 
 .rbac-dashboard__hero-cta {
@@ -53,38 +53,230 @@
   cursor: pointer;
 }
 
-.rbac-dashboard__grid {
+.rbac-dashboard__bento {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 1.25rem;
-  margin-top: 1.5rem;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.rbac-dashboard__card {
+.rbac-metric-card {
+  background: var(--kp-surface-high, #171f36);
+  border: 1px solid rgba(65, 71, 91, 0.16);
   padding: 1.25rem;
-  background-color: var(--rbac-card-bg, var(--kp-surface-high, #171f36));
-  border-radius: 0;
-  outline: 1px solid var(--rbac-card-border, rgba(65, 71, 91, 0.15));
 }
 
-.rbac-dashboard__card-title {
-  margin: 0 0 0.5rem;
-  font-size: 0.875rem;
-  font-weight: 600;
-  color: var(--rbac-card-title, #9aa0a6);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+.rbac-metric-card__head {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
 }
 
-.rbac-dashboard__card-value {
+.rbac-metric-card__eyebrow {
   margin: 0;
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--rbac-card-value, #e8eaed);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--kp-primary, #ba9eff);
+  font-family: var(--font-display, "Space Grotesk", sans-serif);
 }
 
-.rbac-dashboard__card-desc {
-  margin: 0.25rem 0 0;
-  font-size: 0.8125rem;
-  color: var(--rbac-card-desc, #9aa0a6);
+.rbac-metric-card__value {
+  margin: 0.4rem 0 0;
+  font-size: 1.8rem;
+  font-family: var(--font-display, "Space Grotesk", sans-serif);
+}
+
+.rbac-metric-card__value span {
+  font-size: 0.82rem;
+  color: var(--kp-secondary, #62fae3);
+}
+
+.rbac-metric-card__live {
+  margin: 0;
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--kp-secondary, #62fae3);
+}
+
+.rbac-metric-card__bars {
+  height: 220px;
+  margin-top: 1.2rem;
+  display: flex;
+  gap: 0.35rem;
+  align-items: flex-end;
+}
+
+.rbac-metric-card__bars span {
+  flex: 1;
+  height: var(--h);
+  background: linear-gradient(to top, rgba(186, 158, 255, 0.12), rgba(186, 158, 255, 1));
+}
+
+.rbac-metric-card__bars span.is-accent {
+  background: linear-gradient(to top, rgba(98, 250, 227, 0.12), rgba(98, 250, 227, 1));
+  box-shadow: 0 0 14px rgba(98, 250, 227, 0.2);
+}
+
+.rbac-metric-card__progress-list {
+  margin-top: 1rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.rbac-progress-item p,
+.rbac-progress-item span {
+  margin: 0;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+}
+
+.rbac-progress-item p {
+  color: var(--kp-on-surface, #dfe4fe);
+}
+
+.rbac-progress-item span {
+  color: var(--kp-secondary, #62fae3);
+}
+
+.rbac-progress-track {
+  margin-top: 0.4rem;
+  height: 4px;
+  background: var(--kp-surface-highest, #202a46);
+}
+
+.rbac-progress-track div {
+  height: 100%;
+  background: var(--kp-secondary, #62fae3);
+  box-shadow: 0 0 10px rgba(98, 250, 227, 0.35);
+}
+
+.rbac-ledger__head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.rbac-ledger__head h2 {
+  margin: 0;
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  font-family: var(--font-display, "Space Grotesk", sans-serif);
+}
+
+.rbac-ledger__head span {
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--kp-on-surface-variant, #a5aac2);
+}
+
+.rbac-ledger__table-wrap {
+  overflow-x: auto;
+  border: 1px solid rgba(65, 71, 91, 0.16);
+}
+
+.rbac-ledger__table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.rbac-ledger__table th {
+  text-align: left;
+  padding: 0.8rem 0.9rem;
+  background: var(--kp-surface-low, #0f162b);
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.19em;
+  color: var(--kp-on-surface-variant, #a5aac2);
+}
+
+.rbac-ledger__table td {
+  padding: 0.9rem;
+  font-size: 0.73rem;
+  border-top: 1px solid rgba(65, 71, 91, 0.16);
+  color: var(--kp-on-surface, #dfe4fe);
+}
+
+.rbac-ledger__status {
+  display: inline-block;
+  padding: 0.14rem 0.4rem;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--kp-secondary, #62fae3);
+  background: rgba(98, 250, 227, 0.12);
+}
+
+.rbac-ledger__status--error {
+  color: var(--kp-error, #ff6b7a);
+  background: rgba(255, 107, 122, 0.14);
+}
+
+.rbac-ledger__status--pending {
+  color: var(--kp-primary, #ba9eff);
+  background: rgba(186, 158, 255, 0.14);
+}
+
+.rbac-beacons {
+  margin-top: 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.85rem;
+}
+
+.rbac-beacon {
+  margin: 0;
+  padding: 0.9rem;
+  border: 1px solid rgba(65, 71, 91, 0.14);
+  background: var(--kp-surface-low, #0f162b);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--kp-on-surface, #dfe4fe);
+  font-family: var(--font-display, "Space Grotesk", sans-serif);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.rbac-beacon span {
+  width: 0.45rem;
+  height: 0.45rem;
+  background: var(--kp-secondary, #62fae3);
+  box-shadow: 0 0 8px rgba(98, 250, 227, 0.35);
+}
+
+.rbac-dashboard__fab {
+  position: fixed;
+  right: 2rem;
+  bottom: 1.75rem;
+  width: 3rem;
+  height: 3rem;
+  border: none;
+  background: var(--kp-primary, #ba9eff);
+  color: #000;
+  font-size: 1.4rem;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(186, 158, 255, 0.4);
+}
+
+@media (max-width: 1100px) {
+  .rbac-dashboard__bento {
+    grid-template-columns: 1fr;
+  }
+
+  .rbac-beacons {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .rbac-beacons {
+    grid-template-columns: 1fr;
+  }
 }

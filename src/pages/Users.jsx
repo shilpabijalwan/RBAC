@@ -45,7 +45,11 @@ function Users() {
         id: "actions",
         header: "Actions",
         render: (row) => (
-          <RbacRowActionsMenu row={row} onEdit={handleEditUser} onDelete={handleDeleteUser} />
+          <RbacRowActionsMenu
+            row={row}
+            onEdit={handleEditUser}
+            onDelete={handleDeleteUser}
+          />
         ),
       },
     ],

@@ -27,7 +27,7 @@ function AppLayout() {
   const navigate = useNavigate();
   const currentUser = useSelector(selectCurrentUser);
   const userName = currentUser?.name || currentUser?.fullName || "User";
-  const userEmail = currentUser?.email || "user@example.com";
+  const userEmail = currentUser?.email || "node@precision.local";
   const [logout] = useLogoutMutation();
   const [updateProfile] = useUpdateProfileMutation();
   const [updateProfileRoles] = useUpdateProfileRolesMutation();
@@ -108,7 +108,7 @@ function AppLayout() {
     <div className="rbac-layout">
       <aside className="rbac-sidebar">
         <div className="rbac-sidebar__brand-wrap">
-          <div className="rbac-sidebar__brand">PRECISION_OS</div>
+          <div className="rbac-sidebar__brand">PROGESSO</div>
           <p className="rbac-sidebar__tag">Technical Authority</p>
         </div>
         <nav className="rbac-sidebar__nav">
@@ -134,6 +134,39 @@ function AppLayout() {
               ◫
             </span>
             Roles
+          </NavLink>
+          <NavLink
+            to="/projects"
+            className={({ isActive }) =>
+              `rbac-sidebar__link ${isActive ? "rbac-sidebar__link--active" : ""}`
+            }
+          >
+            <span className="rbac-sidebar__icon" aria-hidden>
+              ◧
+            </span>
+            Projects
+          </NavLink>
+          <NavLink
+            to="/team"
+            className={({ isActive }) =>
+              `rbac-sidebar__link ${isActive ? "rbac-sidebar__link--active" : ""}`
+            }
+          >
+            <span className="rbac-sidebar__icon" aria-hidden>
+              ◉
+            </span>
+            Team
+          </NavLink>
+          <NavLink
+            to="/settings"
+            className={({ isActive }) =>
+              `rbac-sidebar__link ${isActive ? "rbac-sidebar__link--active" : ""}`
+            }
+          >
+            <span className="rbac-sidebar__icon" aria-hidden>
+              ⚙
+            </span>
+            Settings
           </NavLink>
           <NavLink
             to="/permissions"
@@ -189,6 +222,7 @@ function AppLayout() {
               aria-label="Notifications"
             >
               <span aria-hidden>◉</span>
+              <span className="rbac-header__notify-dot" aria-hidden />
             </button>
             <div className="rbac-header__user-wrap" ref={userMenuRef}>
               <button
@@ -198,12 +232,12 @@ function AppLayout() {
                 aria-haspopup="menu"
                 aria-expanded={isUserMenuOpen}
               >
+                <span className="rbac-header__user-meta">
+                  <span className="rbac-header__user-name">{currentUser?.role}</span>
+                  <span className="rbac-header__user-subtitle">{userEmail}</span>
+                </span>
                 <span className="rbac-header__avatar" aria-hidden>
                   {initials}
-                </span>
-                <span className="rbac-header__user-meta">
-                  <span className="rbac-header__user-name">{userName}</span>
-                  <span className="rbac-header__user-email">{userEmail}</span>
                 </span>
                 <span className="rbac-header__menu-icon" aria-hidden>
                   ▾
@@ -221,13 +255,6 @@ function AppLayout() {
                   onClick={handleOpenProfileSheet}
                 >
                   Update profile
-                </button>
-                <button
-                  type="button"
-                  className="rbac-user-menu__item"
-                  role="menuitem"
-                >
-                  Account settings
                 </button>
                 <button
                   type="button"

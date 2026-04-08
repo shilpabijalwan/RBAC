@@ -1,0 +1,166 @@
+.rbac-projects {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 5.5rem);
+}
+
+.rbac-projects__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.rbac-projects__title {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-family: var(--font-display, "Space Grotesk", sans-serif);
+  letter-spacing: -0.02em;
+}
+
+.rbac-projects__subtitle {
+  margin: 0.45rem 0 0;
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--kp-on-surface-variant, #a5aac2);
+}
+
+.rbac-projects__actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.rbac-projects__btn {
+  border: 1px solid rgba(65, 71, 91, 0.22);
+  background: var(--kp-surface-high, #171f36);
+  color: var(--kp-secondary, #62fae3);
+  padding: 0.5rem 1rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-family: var(--font-display, "Space Grotesk", sans-serif);
+}
+
+.rbac-projects__board {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.rbac-projects__column {
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--kp-surface-lowest, #000);
+  border-top: 2px solid rgba(65, 71, 91, 0.35);
+}
+
+.rbac-projects__column--secondary {
+  border-top-color: var(--kp-secondary, #62fae3);
+  box-shadow: 0 0 15px rgba(98, 250, 227, 0.25);
+}
+
+.rbac-projects__column-header {
+  background: var(--kp-surface-low, #0f162b);
+  padding: 0.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rbac-projects__column-header h2 {
+  margin: 0;
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.24em;
+  color: var(--kp-on-surface-variant, #a5aac2);
+}
+
+.rbac-projects__column-header span {
+  font-size: 0.62rem;
+  font-weight: 700;
+  color: var(--kp-primary, #ba9eff);
+}
+
+.rbac-projects__cards {
+  min-height: 0;
+  overflow-y: auto;
+  display: grid;
+  gap: 0.8rem;
+  padding: 0.8rem;
+}
+
+.rbac-projects__card {
+  background: var(--kp-surface-high, #171f36);
+  border-left: 2px solid rgba(65, 71, 91, 0.8);
+  padding: 0.85rem;
+}
+
+.rbac-projects__card.is-urgent {
+  border-left-color: var(--kp-primary, #ba9eff);
+}
+
+.rbac-projects__card.is-critical {
+  border-left-color: var(--kp-secondary, #62fae3);
+}
+
+.rbac-projects__card.is-review {
+  border-left-color: var(--kp-tertiary, #ff86c3);
+}
+
+.rbac-projects__card.is-done {
+  border-left-color: rgba(98, 250, 227, 0.4);
+  opacity: 0.75;
+}
+
+.rbac-projects__badge {
+  margin: 0;
+  display: inline-block;
+  font-size: 0.56rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--kp-primary, #ba9eff);
+  background: rgba(186, 158, 255, 0.12);
+  padding: 0.2rem 0.4rem;
+}
+
+.rbac-projects__card h3 {
+  margin: 0.55rem 0 0.45rem;
+  font-size: 0.88rem;
+  line-height: 1.25;
+  font-family: var(--font-display, "Space Grotesk", sans-serif);
+}
+
+.rbac-projects__desc {
+  margin: 0;
+  color: var(--kp-on-surface-variant, #a5aac2);
+  font-size: 0.73rem;
+}
+
+.rbac-projects__meta {
+  margin: 0.6rem 0 0;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--kp-secondary, #62fae3);
+}
+
+@media (max-width: 1200px) {
+  .rbac-projects__board {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 700px) {
+  .rbac-projects {
+    height: auto;
+  }
+
+  .rbac-projects__board {
+    grid-template-columns: 1fr;
+  }
+}
