@@ -1,38 +1,23 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   logout as logoutAction,
   selectCurrentUser,
-  setCredentials,
 } from "../../store/slices/authSlice";
 import "../../pages/shared.css";
 import "./AppLayout.css";
-import {
-  useGetAvailableRolesQuery,
-  useLogoutMutation,
-  useUpdateProfileMutation,
-  useUpdateProfileRolesMutation,
-} from "../../store/services/AuthServices";
-import UpdateProfileSideSheet from "../UpdateProfileSideSheet";
+import { useLogoutMutation } from "../../store/services/AuthServices";
 
 function AppLayout() {
   const { pathname } = useLocation();
   const teamNavActive = pathname === "/team" || pathname.startsWith("/team/");
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
-  const [isProfileSheetOpen, setIsProfileSheetOpen] = useState(false);
-  const [profileSheetKey, setProfileSheetKey] = useState(0);
-  const userMenuRef = useRef(null);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentUser = useSelector(selectCurrentUser);
   const userName = currentUser?.name || currentUser?.fullName || "User";
   const userEmail = currentUser?.email || "node@precision.local";
   const [logout] = useLogoutMutation();
-  const [updateProfile] = useUpdateProfileMutation();
-  const [updateProfileRoles] = useUpdateProfileRolesMutation();
-  const { data: rolesResponse } = useGetAvailableRolesQuery();
   const initials =
     userName
       .split(" ")
@@ -41,21 +26,7 @@ function AppLayout() {
       .map((part) => part[0]?.toUpperCase())
       .join("") || "U";
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (!userMenuRef.current?.contains(event.target)) {
-        setIsUserMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
   const handleLogout = async () => {
-    setIsUserMenuOpen(false);
     try {
       await logout().unwrap();
     } catch (error) {
@@ -66,43 +37,8 @@ function AppLayout() {
     }
   };
 
-  const handleOpenProfileSheet = () => {
-    setIsUserMenuOpen(false);
-    setProfileSheetKey((k) => k + 1);
-    setIsProfileSheetOpen(true);
-  };
-
-  const handleProfileUpdate = async (payload) => {
-    try {
-      const response = await updateProfile(payload).unwrap();
-      const updatedUser = response?.user ?? response?.data?.user;
-      if (updatedUser) {
-        dispatch(setCredentials({ user: updatedUser }));
-      }
-    } catch (error) {
-      console.log("profile update error", error);
-    }
-  };
-
-  const handleProfileRolesUpdate = async (payload) => {
-    try {
-      const response = await updateProfileRoles(payload).unwrap();
-      const updatedUser = response?.user ?? response?.data?.user;
-      if (updatedUser) {
-        dispatch(setCredentials({ user: updatedUser }));
-      } else {
-        dispatch(
-          setCredentials({
-            user: {
-              ...currentUser,
-              roles: payload.roles,
-            },
-          }),
-        );
-      }
-    } catch (error) {
-      console.log("roles update error", error);
-    }
+  const handleOpenProfilePage = () => {
+    navigate("/profile");
   };
 
   return (
@@ -225,62 +161,25 @@ function AppLayout() {
               <span aria-hidden>◉</span>
               <span className="rbac-header__notify-dot" aria-hidden />
             </button>
-            <div className="rbac-header__user-wrap" ref={userMenuRef}>
-              <button
-                type="button"
-                className="rbac-header__user"
-                onClick={() => setIsUserMenuOpen((prev) => !prev)}
-                aria-haspopup="menu"
-                aria-expanded={isUserMenuOpen}
-              >
-                <span className="rbac-header__user-meta">
-                  <span className="rbac-header__user-name">{currentUser?.role}</span>
-                  <span className="rbac-header__user-subtitle">{userEmail}</span>
-                </span>
-                <span className="rbac-header__avatar" aria-hidden>
-                  {initials}
-                </span>
-                <span className="rbac-header__menu-icon" aria-hidden>
-                  ▾
-                </span>
-              </button>
-
-              <div
-                className={`rbac-user-menu ${isUserMenuOpen ? "rbac-user-menu--open" : ""}`}
-                role="menu"
-              >
-                <button
-                  type="button"
-                  className="rbac-user-menu__item"
-                  role="menuitem"
-                  onClick={handleOpenProfileSheet}
-                >
-                  Update profile
-                </button>
-                <button
-                  type="button"
-                  className="rbac-user-menu__item rbac-user-menu__item--danger"
-                  role="menuitem"
-                  onClick={handleLogout}
-                >
-                  Logout
-                </button>
-              </div>
-            </div>
+            <button
+              type="button"
+              className="rbac-header__user"
+              onClick={handleOpenProfilePage}
+              aria-label="Open my profile"
+            >
+              <span className="rbac-header__user-meta">
+                <span className="rbac-header__user-name">{currentUser?.role}</span>
+                <span className="rbac-header__user-subtitle">{userEmail}</span>
+              </span>
+              <span className="rbac-header__avatar" aria-hidden>
+                {initials}
+              </span>
+            </button>
           </div>
         </header>
         <section className="rbac-content">
           <Outlet />
         </section>
-        <UpdateProfileSideSheet
-          key={profileSheetKey}
-          open={isProfileSheetOpen}
-          onClose={() => setIsProfileSheetOpen(false)}
-          currentUser={currentUser}
-          availableRoles={rolesResponse?.roles ?? rolesResponse?.data ?? []}
-          onSubmitProfile={handleProfileUpdate}
-          onSubmitRoles={handleProfileRolesUpdate}
-        />
       </main>
     </div>
   );

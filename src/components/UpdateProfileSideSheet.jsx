@@ -1,6 +1,5 @@
-import { useCallback, useMemo, useState } from "react";
-import Button from "./Button";
-import CloseButton from "./CloseButton";
+﻿import { useCallback, useMemo, useState } from "react";
+import "./UpdateProfileSideSheet.css";
 
 function getInitialRoleIds(user) {
   if (!user) return [];
@@ -11,6 +10,16 @@ function getInitialRoleIds(user) {
   return typeof roles === "string" ? [roles] : [];
 }
 
+function getInitials(user) {
+  const name = user?.name || user?.fullName || "System Operator";
+  return name
+    .split(" ")
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((p) => p[0]?.toUpperCase())
+    .join("") || "OP";
+}
+
 function UpdateProfileSideSheet({
   open,
   onClose,
@@ -19,7 +28,6 @@ function UpdateProfileSideSheet({
   onSubmitProfile,
   onSubmitRoles,
 }) {
-  const [activeTab, setActiveTab] = useState("profile");
   const [selectedRoles, setSelectedRoles] = useState(() => getInitialRoleIds(currentUser));
 
   const resolvedRoles = useMemo(() => {
@@ -31,14 +39,12 @@ function UpdateProfileSideSheet({
 
   const handleClose = useCallback(() => {
     onClose();
-    setActiveTab("profile");
   }, [onClose]);
 
   const handleProfileSubmit = useCallback(
     (e) => {
       e.preventDefault();
-      const form = e.target;
-      const formData = new FormData(form);
+      const formData = new FormData(e.target);
       const payload = {
         name: formData.get("name") ?? "",
         email: formData.get("email") ?? "",
@@ -61,149 +67,177 @@ function UpdateProfileSideSheet({
     handleClose();
   }, [handleClose, onSubmitRoles, selectedRoles]);
 
+  const userName = currentUser?.name || currentUser?.fullName || "System Operator";
+  const userRole = currentUser?.role || "Lead Systems Architect";
+  const userEmail = currentUser?.email || "operator@neon-architect.tech";
+
   return (
     <>
       <div
         role="presentation"
-        className={`fixed inset-0 z-40 bg-black/50 transition-opacity duration-200 ease-out ${open ? "opacity-100" : "pointer-events-none opacity-0"}`}
+        className={`profile-mask ${open ? "" : "profile-mask--hidden"}`}
         aria-hidden={!open}
         onClick={handleClose}
       />
 
-      <div
+      <aside
         role="dialog"
         aria-modal="true"
         aria-hidden={!open}
         aria-labelledby="update-profile-sheet-title"
-        className={`fixed inset-y-0 right-0 z-50 flex w-full max-w-[600px] flex-col bg-white shadow-xl transition-transform duration-200 ease-out dark:bg-zinc-900 ${open ? "translate-x-0" : "pointer-events-none translate-x-full"}`}
+        className={`profile-sheet ${open ? "" : "profile-sheet--hidden"}`}
       >
-        <div className="flex items-center justify-between border-b border-zinc-200 px-6 py-4 dark:border-zinc-700">
-          <h2
-            id="update-profile-sheet-title"
-            className="text-lg font-semibold text-zinc-900 dark:text-zinc-100"
-          >
-            Update profile
-          </h2>
-          <CloseButton onClick={handleClose} ariaLabel="Close update profile sheet" />
-        </div>
+        <header className="profile-sheet__topbar">
+          <div className="profile-sheet__search-wrap">
+            <span className="profile-sheet__search-icon" aria-hidden>
+              ⌕
+            </span>
+            <input className="profile-sheet__search" placeholder="COMMAND_SEARCH..." type="text" />
+          </div>
 
-        <div className="border-b border-zinc-200 px-6 py-3 dark:border-zinc-700">
-          <div className="flex gap-2 rounded-lg bg-zinc-100 p-1 dark:bg-zinc-800">
-            <button
-              type="button"
-              className={`rounded-md px-3 py-1.5 text-sm ${activeTab === "profile" ? "bg-white text-zinc-900 shadow dark:bg-zinc-700 dark:text-zinc-100" : "text-zinc-600 dark:text-zinc-300"}`}
-              onClick={() => setActiveTab("profile")}
-            >
-              Profile
+          <div className="profile-sheet__top-actions">
+            <button type="button" className="profile-sheet__icon-btn" aria-label="Notifications">
+              ◉
             </button>
-            <button
-              type="button"
-              className={`rounded-md px-3 py-1.5 text-sm ${activeTab === "access" ? "bg-white text-zinc-900 shadow dark:bg-zinc-700 dark:text-zinc-100" : "text-zinc-600 dark:text-zinc-300"}`}
-              onClick={() => setActiveTab("access")}
-            >
-              Access
+            <button type="button" className="profile-sheet__icon-btn" aria-label="Command panel">
+              ⌘
+            </button>
+            <button type="button" className="profile-sheet__close-btn" onClick={handleClose} aria-label="Close">
+              ✕
             </button>
           </div>
-        </div>
+        </header>
 
-        {activeTab === "profile" ? (
-          <form onSubmit={handleProfileSubmit} className="flex flex-1 flex-col overflow-hidden">
-            <div className="flex-1 overflow-y-auto px-6 py-5">
-              <div className="space-y-5">
-                <div>
-                  <label
-                    htmlFor="profile-name"
-                    className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
-                  >
-                    Name
-                  </label>
-                  <input
-                    id="profile-name"
-                    name="name"
-                    type="text"
-                    defaultValue={currentUser?.name || currentUser?.fullName || ""}
-                    placeholder="Your name"
-                    className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-zinc-900 placeholder-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder-zinc-500"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="profile-email"
-                    className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
-                  >
-                    Email
-                  </label>
-                  <input
-                    id="profile-email"
-                    name="email"
-                    type="email"
-                    defaultValue={currentUser?.email || ""}
-                    placeholder="you@example.com"
-                    className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-zinc-900 placeholder-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder-zinc-500"
-                  />
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="profile-phone"
-                    className="mb-1.5 block text-sm font-medium text-zinc-700 dark:text-zinc-300"
-                  >
-                    Phone
-                  </label>
-                  <input
-                    id="profile-phone"
-                    name="phone"
-                    type="text"
-                    defaultValue={currentUser?.phone || ""}
-                    placeholder="e.g. +1 555 123 4567"
-                    className="w-full rounded-lg border border-zinc-300 bg-white px-3 py-2 text-zinc-900 placeholder-zinc-400 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder-zinc-500"
-                  />
-                </div>
-              </div>
+        <form id="profile-form" onSubmit={handleProfileSubmit} className="profile-sheet__body">
+          <section className="profile-hero">
+            <div className="profile-hero__avatar-wrap">
+              <div className="profile-hero__avatar">{getInitials(currentUser)}</div>
+              <span className="profile-hero__beacon" aria-hidden>
+                <span />
+              </span>
             </div>
 
-            <div className="flex shrink-0 justify-end gap-3 border-t border-zinc-200 px-6 py-4 dark:border-zinc-700">
-              <Button type="button" variant="secondary" onClick={handleClose}>
-                Cancel
-              </Button>
-              <Button type="submit" variant="primary">
-                Save profile
-              </Button>
-            </div>
-          </form>
-        ) : (
-          <div className="flex flex-1 flex-col overflow-hidden">
-            <div className="flex-1 overflow-y-auto px-6 py-5">
-              <p className="mb-3 text-sm text-zinc-600 dark:text-zinc-300">
-                Update roles and access permissions for this account.
+            <div className="profile-hero__meta">
+              <p className="profile-hero__phase">PHASE_V4_CORE_ARCHITECT</p>
+              <h2 id="update-profile-sheet-title" className="profile-hero__name">
+                {userName.replace(/\s+/g, "_")}
+              </h2>
+              <p className="profile-hero__desc">
+                Redefining spatial compute paradigms through kinetic synchronicity. Senior Lead at Kinetic Sync Operations.
               </p>
-              <div className="space-y-2 rounded-lg border border-zinc-300 bg-zinc-50 p-3 dark:border-zinc-600 dark:bg-zinc-800/50">
-                {resolvedRoles.map((role) => (
-                  <label key={role.id} className="flex cursor-pointer items-center gap-2">
-                    <input
-                      type="checkbox"
-                      checked={selectedRoles.includes(role.id)}
-                      onChange={() => handleToggleRole(role.id)}
-                      className="h-4 w-4 rounded border-zinc-300 text-blue-600 focus:ring-blue-500 dark:border-zinc-600 dark:bg-zinc-700"
-                    />
-                    <span className="text-sm text-zinc-700 dark:text-zinc-300">{role.label}</span>
-                  </label>
-                ))}
-              </div>
             </div>
+          </section>
 
-            <div className="flex shrink-0 justify-end gap-3 border-t border-zinc-200 px-6 py-4 dark:border-zinc-700">
-              <Button type="button" variant="secondary" onClick={handleClose}>
-                Cancel
-              </Button>
-              <Button type="button" variant="primary" onClick={handleRolesSave}>
-                Save access
-              </Button>
-            </div>
+          <div className="profile-grid">
+            <section className="profile-main">
+              <div className="profile-section">
+                <h3 className="profile-section__title profile-section__title--primary">IDENTITY_RECORDS</h3>
+                <div className="profile-fields">
+                  <label className="profile-field">
+                    <span>Full Name</span>
+                    <input name="name" type="text" defaultValue={userName} />
+                  </label>
+                  <label className="profile-field">
+                    <span>Professional Role</span>
+                    <input type="text" value={userRole} readOnly />
+                  </label>
+                  <label className="profile-field profile-field--full">
+                    <span>Communication Endpoint (Email)</span>
+                    <input name="email" type="email" defaultValue={userEmail} />
+                  </label>
+                  <label className="profile-field profile-field--full">
+                    <span>Secure Contact Channel</span>
+                    <input name="phone" type="text" defaultValue={currentUser?.phone || ""} placeholder="+1 555 123 4567" />
+                  </label>
+                </div>
+              </div>
+
+              <div className="profile-section">
+                <h3 className="profile-section__title profile-section__title--secondary">CORE_COMPETENCIES</h3>
+                <div className="profile-skills">
+                  {["Neural Interface Design", "Rust Performance", "Distributed Systems", "Kinetic UX"].map((skill) => (
+                    <span key={skill} className="profile-skill">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            <aside className="profile-side">
+              <div className="profile-panel profile-panel--tertiary">
+                <h4>Signal_Filters</h4>
+                <div className="profile-toggles">
+                  <div className="profile-toggle-row">
+                    <div>
+                      <strong>Email Dispatch</strong>
+                      <small>Critical updates only</small>
+                    </div>
+                    <span className="profile-toggle is-on" aria-hidden />
+                  </div>
+                  <div className="profile-toggle-row">
+                    <div>
+                      <strong>HUD Notifications</strong>
+                      <small>Desktop alert overlays</small>
+                    </div>
+                    <span className="profile-toggle is-on" aria-hidden />
+                  </div>
+                </div>
+              </div>
+
+              <div className="profile-panel">
+                <h4>Security_Protocols</h4>
+                <button type="button" className="profile-action-btn">Update_Access_Key</button>
+                <button type="button" className="profile-action-btn">Configure_2FA</button>
+              </div>
+
+              <div className="profile-panel">
+                <h4>Access_Roles</h4>
+                <div className="profile-roles">
+                  {resolvedRoles.map((role) => (
+                    <label key={role.id} className="profile-role-item">
+                      <input
+                        type="checkbox"
+                        checked={selectedRoles.includes(role.id)}
+                        onChange={() => handleToggleRole(role.id)}
+                      />
+                      <span>{role.label}</span>
+                    </label>
+                  ))}
+                </div>
+                <button type="button" className="profile-save-roles" onClick={handleRolesSave}>
+                  SAVE_ACCESS
+                </button>
+              </div>
+
+              <div className="profile-health">
+                <div>
+                  <span>SYNC_INTEGRITY</span>
+                  <strong>99.8%</strong>
+                </div>
+                <div className="profile-health__bar">
+                  <span />
+                </div>
+              </div>
+            </aside>
           </div>
-        )}
-      </div>
+        </form>
+
+        <footer className="profile-footer">
+          <div className="profile-footer__status">
+            <span className="profile-footer__dot" aria-hidden />
+            SYSTEM_STABLE: READY_FOR_COMMIT
+          </div>
+          <div className="profile-footer__actions">
+            <button type="button" className="profile-btn profile-btn--ghost" onClick={handleClose}>
+              Discard_Changes
+            </button>
+            <button type="submit" form="profile-form" className="profile-btn profile-btn--primary">
+              COMMIT_CHANGES
+            </button>
+          </div>
+        </footer>
+      </aside>
     </>
   );
 }

@@ -8,6 +8,7 @@ import Users from "./pages/Users";
 import Projects from "./pages/Projects";
 import Team from "./pages/Team";
 import TeamMemberProfile from "./pages/TeamMemberProfile";
+import Profile from "./pages/Profile";
 import Settings from "./pages/Settings";
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -24,6 +25,7 @@ function App() {
           <Route path="projects" element={<Projects />} />
           <Route path="team" element={<Team />} />
           <Route path="team/:memberSlug" element={<TeamMemberProfile />} />
+          <Route path="profile" element={<Profile />} />
           <Route path="settings" element={<Settings />} />
           <Route path="roles" element={<Roles />} />
           <Route path="permissions" element={<Permissions />} />
