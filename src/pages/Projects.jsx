@@ -13,15 +13,15 @@ const columns = [
       {
         tone: "urgent",
         badge: "Urgent",
-        title: "Integrate Web3 Auth Layer",
-        description: "Verification of multi-sig wallets for architect access nodes.",
+        title: "Integrate SSO Authentication",
+        description: "Enable secure login flow and role mapping for internal users.",
         meta: "2D",
       },
       {
         tone: "normal",
         badge: "Normal",
-        title: "Shader Optimization",
-        description: "Refactoring vertex shaders for the main architectural render engine.",
+        title: "Dashboard Rendering Optimization",
+        description: "Improve chart rendering performance for large dashboard datasets.",
         meta: "5D",
       },
     ],
@@ -36,14 +36,14 @@ const columns = [
         tone: "critical",
         badge: "Critical",
         title: "Network Latency Audit",
-        description: "Tracing packet loss across the distributed Tokyo node array.",
-        meta: "ACTIVE_NOW",
+        description: "Investigate API response delays across regional environments.",
+        meta: "In Progress",
       },
       {
         tone: "normal",
         badge: "Normal",
         title: "Component Library v2",
-        description: "Updating the precision framework for the kinetic UI assets.",
+        description: "Standardize shared UI components and docs for faster development.",
         meta: "20%",
       },
     ],
@@ -57,9 +57,9 @@ const columns = [
       {
         tone: "review",
         badge: "Awaiting QC",
-        title: "Geo-Spatial Mapping Fix",
-        description: "Fixed the coordinate mismatch on the lunar-base visualization module.",
-        meta: "2 FEEDBACK LOOPS OPEN",
+        title: "Map View Coordinate Fix",
+        description: "Resolved coordinate mismatch in the geospatial analytics module.",
+        meta: "2 reviews pending",
       },
     ],
   },
@@ -73,14 +73,14 @@ const columns = [
         tone: "done",
         badge: "Validated",
         title: "Security Patch 8.1.0",
-        description: "Completed by @SYSTEM_CORE",
+        description: "Completed by Platform Team",
         meta: "",
       },
       {
         tone: "done",
         badge: "Validated",
         title: "API Documentation",
-        description: "Archived 12H ago",
+        description: "Archived 12h ago",
         meta: "",
       },
     ],
@@ -99,8 +99,8 @@ function Projects() {
     <div className="rbac-page rbac-projects">
       <header className="rbac-projects__header">
         <div>
-          <h1 className="rbac-projects__title">PROJECT_KINETIC</h1>
-          <p className="rbac-projects__subtitle">Team Progress Tracker // Node_04</p>
+          <h1 className="rbac-projects__title">Project Board</h1>
+          <p className="rbac-projects__subtitle">Track active work by status</p>
         </div>
         <div className="rbac-projects__actions">
           <button type="button" className="rbac-projects__btn rbac-projects__btn--ghost">

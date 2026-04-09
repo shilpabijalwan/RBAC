@@ -9,8 +9,7 @@ function Dashboard() {
             Team <span className="rbac-dashboard__hero-highlight">Velocity</span> Index
           </h1>
           <p className="rbac-dashboard__hero-subtitle">
-            Operational oversight of architectural sprints. Real-time monitoring of resource
-            distribution and deployment frequency.
+            Engineering dashboard for sprint health, delivery flow, and team workload.
           </p>
         </div>
         <div className="rbac-dashboard__hero-cta">
@@ -32,7 +31,7 @@ function Dashboard() {
                 42.8 <span>+12%</span>
               </h3>
             </div>
-            <p className="rbac-metric-card__live">Live stream</p>
+            <p className="rbac-metric-card__live">Live</p>
           </div>
           <div className="rbac-metric-card__bars" aria-hidden>
             <span style={{ "--h": "40%" }} />
@@ -59,7 +58,7 @@ function Dashboard() {
               <div className="rbac-progress-track"><div style={{ width: "88%" }} /></div>
             </div>
             <div className="rbac-progress-item">
-              <p>Frontend Neural Net</p>
+              <p>Frontend Platform</p>
               <span>64%</span>
               <div className="rbac-progress-track"><div style={{ width: "64%" }} /></div>
             </div>
@@ -74,7 +73,7 @@ function Dashboard() {
 
       <section className="rbac-ledger">
         <div className="rbac-ledger__head">
-          <h2>System Ledger // Activity</h2>
+          <h2>Activity Log</h2>
           <span>View all logs</span>
         </div>
         <div className="rbac-ledger__table-wrap">
@@ -82,30 +81,30 @@ function Dashboard() {
             <thead>
               <tr>
                 <th>Timestamp</th>
-                <th>Process Id</th>
+                <th>Task ID</th>
                 <th>Operator</th>
                 <th>Status</th>
-                <th>Intensity</th>
+                <th>Priority</th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td>14:22:01</td>
-                <td>CORE_REFACTOR_01</td>
+                <td>CORE-REFACTOR-01</td>
                 <td>A. Vance</td>
                 <td><span className="rbac-ledger__status">Stable</span></td>
                 <td>II</td>
               </tr>
               <tr>
                 <td>14:18:55</td>
-                <td>UPSTREAM_SYNC</td>
-                <td>AUTO_DEPLOY</td>
+                <td>UPSTREAM-SYNC</td>
+                <td>Auto Deploy</td>
                 <td><span className="rbac-ledger__status rbac-ledger__status--error">Critical</span></td>
                 <td>IIII</td>
               </tr>
               <tr>
                 <td>13:45:12</td>
-                <td>SCHEMA_MIGRATION</td>
+                <td>SCHEMA-MIGRATION</td>
                 <td>L. Kagawa</td>
                 <td><span className="rbac-ledger__status rbac-ledger__status--pending">Pending</span></td>
                 <td>I</td>
@@ -117,9 +116,9 @@ function Dashboard() {
 
       <section className="rbac-beacons">
         <article className="rbac-beacon"><span />Network Health</article>
-        <article className="rbac-beacon"><span />Architecture Load</article>
-        <article className="rbac-beacon"><span />Uptime Counter</article>
-        <article className="rbac-beacon"><span />Security Protocol</article>
+        <article className="rbac-beacon"><span />Service Load</article>
+        <article className="rbac-beacon"><span />Uptime</article>
+        <article className="rbac-beacon"><span />Security Status</article>
       </section>
 
       <button type="button" className="rbac-dashboard__fab" aria-label="Add">

@@ -19,7 +19,7 @@ function getInitialRoleIds(user) {
 }
 
 function getInitials(user) {
-  const name = user?.name || user?.fullName || "System Operator";
+  const name = user?.name || user?.fullName || "User";
   return name
     .split(" ")
     .filter(Boolean)
@@ -95,9 +95,9 @@ function Profile() {
     }
   }, [currentUser, dispatch, selectedRoles, updateProfileRoles]);
 
-  const userName = currentUser?.name || currentUser?.fullName || "System Operator";
-  const userRole = currentUser?.role || "Lead Systems Architect";
-  const userEmail = currentUser?.email || "operator@neon-architect.tech";
+  const userName = currentUser?.name || currentUser?.fullName || "User";
+  const userRole = currentUser?.role || "Software Engineer";
+  const userEmail = currentUser?.email || "user@company.com";
 
   return (
     <section className="profile-page">
@@ -111,10 +111,10 @@ function Profile() {
           </div>
 
           <div className="profile-page__meta">
-            <p className="profile-page__phase">PHASE_V4_CORE_ARCHITECT</p>
-            <h1 className="profile-page__name">{userName.replace(/\s+/g, "_")}</h1>
+            <p className="profile-page__phase">PROFILE SETTINGS</p>
+            <h1 className="profile-page__name">{userName}</h1>
             <p className="profile-page__desc">
-              Redefining spatial compute paradigms through kinetic synchronicity. Senior Lead at Kinetic Sync Operations.
+              Manage your account details, notifications, and access preferences.
             </p>
           </div>
         </section>
@@ -122,7 +122,7 @@ function Profile() {
         <div className="profile-page__grid">
           <section className="profile-page__main">
             <div className="profile-page__section">
-              <h2 className="profile-page__title profile-page__title--primary">IDENTITY_RECORDS</h2>
+              <h2 className="profile-page__title profile-page__title--primary">Profile Information</h2>
               <div className="profile-page__fields">
                 <label className="profile-page__field">
                   <span>Full Name</span>
@@ -133,20 +133,20 @@ function Profile() {
                   <input type="text" value={userRole} readOnly />
                 </label>
                 <label className="profile-page__field profile-page__field--full">
-                  <span>Communication Endpoint (Email)</span>
+                  <span>Email Address</span>
                   <input name="email" type="email" defaultValue={userEmail} />
                 </label>
                 <label className="profile-page__field profile-page__field--full">
-                  <span>Secure Contact Channel</span>
+                  <span>Phone Number</span>
                   <input name="phone" type="text" defaultValue={currentUser?.phone || ""} placeholder="+1 555 123 4567" />
                 </label>
               </div>
             </div>
 
             <div className="profile-page__section">
-              <h2 className="profile-page__title profile-page__title--secondary">CORE_COMPETENCIES</h2>
+              <h2 className="profile-page__title profile-page__title--secondary">Core Skills</h2>
               <div className="profile-page__skills">
-                {["Neural Interface Design", "Rust Performance", "Distributed Systems", "Kinetic UX"].map((skill) => (
+                {["React", "TypeScript", "Distributed Systems", "UI/UX"].map((skill) => (
                   <span key={skill} className="profile-page__skill">
                     {skill}
                   </span>
@@ -157,19 +157,19 @@ function Profile() {
 
           <aside className="profile-page__side">
             <div className="profile-page__panel profile-page__panel--tertiary">
-              <h3>Signal_Filters</h3>
+              <h3>Notification Settings</h3>
               <div className="profile-page__toggles">
                 <div className="profile-page__toggle-row">
                   <div>
-                    <strong>Email Dispatch</strong>
-                    <small>Critical updates only</small>
+                    <strong>Email Alerts</strong>
+                    <small>Only important updates</small>
                   </div>
                   <span className="profile-page__toggle is-on" aria-hidden />
                 </div>
                 <div className="profile-page__toggle-row">
                   <div>
-                    <strong>HUD Notifications</strong>
-                    <small>Desktop alert overlays</small>
+                    <strong>Desktop Notifications</strong>
+                    <small>Browser notification popups</small>
                   </div>
                   <span className="profile-page__toggle is-on" aria-hidden />
                 </div>
@@ -177,13 +177,13 @@ function Profile() {
             </div>
 
             <div className="profile-page__panel">
-              <h3>Security_Protocols</h3>
-              <button type="button" className="profile-page__action-btn">Update_Access_Key</button>
-              <button type="button" className="profile-page__action-btn">Configure_2FA</button>
+              <h3>Security</h3>
+              <button type="button" className="profile-page__action-btn">Update Password</button>
+              <button type="button" className="profile-page__action-btn">Configure Two-Factor Auth</button>
             </div>
 
             <div className="profile-page__panel">
-              <h3>Access_Roles</h3>
+              <h3>Access Roles</h3>
               <div className="profile-page__roles">
                 {resolvedRoles.map((role) => (
                   <label key={role.id} className="profile-page__role-item">
@@ -197,13 +197,13 @@ function Profile() {
                 ))}
               </div>
               <button type="button" className="profile-page__save-roles" onClick={handleRolesSave}>
-                SAVE_ACCESS
+                Save Access
               </button>
             </div>
 
             <div className="profile-page__health">
               <div>
-                <span>SYNC_INTEGRITY</span>
+                <span>Account Health</span>
                 <strong>99.8%</strong>
               </div>
               <div className="profile-page__health-bar">
@@ -217,14 +217,14 @@ function Profile() {
       <footer className="profile-page__footer">
         <div className="profile-page__status">
           <span className="profile-page__dot" aria-hidden />
-          SYSTEM_STABLE: READY_FOR_COMMIT
+          Ready to save profile changes
         </div>
         <div className="profile-page__actions">
           <button type="button" className="profile-page__btn profile-page__btn--ghost" onClick={() => navigate(-1)}>
-            Discard_Changes
+            Discard Changes
           </button>
           <button type="submit" form="profile-form" className="profile-page__btn profile-page__btn--primary">
-            COMMIT_CHANGES
+            Save Changes
           </button>
         </div>
       </footer>

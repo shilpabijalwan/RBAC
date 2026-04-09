@@ -9,13 +9,13 @@ function Team() {
       <section className="rbac-team__main">
         <header className="rbac-team__header">
           <div>
-            <h1 className="rbac-team__title">TEAM_DIRECTORY</h1>
+            <h1 className="rbac-team__title">Team Directory</h1>
             <p className="rbac-team__subtitle">
-              Total active nodes: 128 / Priority members highlighted
+              Active members: 128 / key contributors highlighted
             </p>
           </div>
           <button type="button" className="rbac-btn rbac-btn--primary">
-            Provision New Member
+            Add Team Member
           </button>
         </header>
 
@@ -24,7 +24,7 @@ function Team() {
             <article key={member.slug} className={`rbac-team__card is-${member.tone}`}>
               <Link className="rbac-team__card-link" to={`/team/${member.slug}`}>
                 <div>
-                  <h3>{member.codename}</h3>
+                  <h3>{member.displayName}</h3>
                   <p>{member.role}</p>
                   <div className="rbac-team__tags">
                     {member.tags.map((tag) => (
@@ -41,19 +41,19 @@ function Team() {
         </div>
 
         <section className="rbac-team__status">
-          <h2>GLOBAL_STATUS_BEACON</h2>
+          <h2>Team Health Overview</h2>
           <div className="rbac-team__status-grid">
             <article>
               <p>Network Integrity</p>
-              <strong>99.8% NOMINAL</strong>
+              <strong>99.8% Stable</strong>
             </article>
             <article>
-              <p>Active Protocols</p>
-              <strong>42 ENFORCED</strong>
+              <p>Active Policies</p>
+              <strong>42 Applied</strong>
             </article>
             <article>
               <p>System Alerts</p>
-              <strong>02 PENDING</strong>
+              <strong>2 Pending</strong>
             </article>
           </div>
         </section>
@@ -61,53 +61,53 @@ function Team() {
 
       <aside className="rbac-team__editor">
         <header className="rbac-team__editor-head">
-          <h2>PERM_EDITOR_V2</h2>
+          <h2>Permission Editor</h2>
           <span aria-hidden>◈</span>
         </header>
 
         <section className="rbac-team__selected">
-          <h3>ELARA_VANCE</h3>
-          <p>Selected unit</p>
+          <h3>Elara Vance</h3>
+          <p>Selected member</p>
           <div className="rbac-team__auth-track">
             <span />
           </div>
-          <small>Authority Level: 85%</small>
+          <small>Access level: 85%</small>
         </section>
 
         <section className="rbac-team__toggle-group">
-          <h4>Architecture_Access</h4>
+          <h4>Architecture Access</h4>
           <div className="rbac-team__toggle-row">
-            <span>Modify_Core_Grid</span>
+            <span>Modify Core Grid</span>
             <span className="rbac-team__toggle is-on" />
           </div>
           <div className="rbac-team__toggle-row">
-            <span>Override_Safety_Sync</span>
+            <span>Override Safety Sync</span>
             <span className="rbac-team__toggle" />
           </div>
           <div className="rbac-team__toggle-row">
-            <span>Deploy_Protocol_Z</span>
+            <span>Deploy Protocol Z</span>
             <span className="rbac-team__toggle is-on" />
           </div>
         </section>
 
         <section className="rbac-team__toggle-group">
-          <h4>User_Authority</h4>
+          <h4>User Permissions</h4>
           <div className="rbac-team__toggle-row">
-            <span>Provision_Nodes</span>
+            <span>Provision Nodes</span>
             <span className="rbac-team__toggle is-on is-secondary" />
           </div>
           <div className="rbac-team__toggle-row">
-            <span>Wipe_Unit_Memory</span>
+            <span>Reset User Data</span>
             <span className="rbac-team__toggle" />
           </div>
         </section>
 
         <div className="rbac-team__editor-actions">
           <button type="button" className="rbac-team__action rbac-team__action--primary">
-            COMMIT_CHANGES
+            Save Changes
           </button>
           <button type="button" className="rbac-team__action">
-            REVERT_TO_DEFAULT
+            Reset to Default
           </button>
         </div>
       </aside>

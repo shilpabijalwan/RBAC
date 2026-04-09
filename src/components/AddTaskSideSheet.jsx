@@ -120,24 +120,24 @@ function AddTaskSideSheet({ open, onClose, onSubmit }) {
 
           <header className="add-task-header-block">
             <h1 id={titleId} className="add-task-title">
-              DEPLOY_TASK
+              Create Task
             </h1>
             <div className="add-task-session">
               <span className="add-task-session__dot" aria-hidden />
-              <span>SESSION_ACTIVE // NODAL_ACCESS_GRANTED</span>
+              <span>Workspace active</span>
             </div>
           </header>
 
           <form id={formId} className="add-task-form" onSubmit={handleSubmit}>
             <div className="add-task-field-group">
               <label className="add-task-field-label" htmlFor="add-task-objective">
-                Objective Title
+                Task Title
               </label>
               <input
                 id="add-task-objective"
                 name="title"
                 className="add-task-input-title"
-                placeholder="e.g. CORE_REFACTOR_V2"
+                placeholder="e.g. Refactor auth middleware"
                 type="text"
                 required
               />
@@ -147,7 +147,7 @@ function AddTaskSideSheet({ open, onClose, onSubmit }) {
             <div className="add-task-grid-split">
               <div>
                 <span className="add-task-field-label add-task-field-label--muted add-task-field-label--block">
-                  Project Node
+                  Project
                 </span>
                 <label className="add-task-picker-wrap">
                   <select
@@ -172,7 +172,7 @@ function AddTaskSideSheet({ open, onClose, onSubmit }) {
 
               <div>
                 <span className="add-task-field-label add-task-field-label--muted add-task-field-label--block">
-                  Temporal Deadline
+                  Due Date
                 </span>
                 <label className="add-task-picker-wrap">
                   <input
@@ -193,21 +193,21 @@ function AddTaskSideSheet({ open, onClose, onSubmit }) {
             <div>
               <div className="add-task-specs-row">
                 <label className="add-task-field-label add-task-field-label--muted" htmlFor="add-task-specs">
-                  Technical Specifications
+                  Description
                 </label>
-                <span className="add-task-markdown-hint">Markdown_Ready</span>
+                <span className="add-task-markdown-hint">Markdown supported</span>
               </div>
               <textarea
                 id="add-task-specs"
                 name="description"
                 className="add-task-textarea"
-                placeholder="Describe the deployment scope..."
+                placeholder="Describe the task scope..."
               />
             </div>
 
             <div>
               <span className="add-task-field-label add-task-field-label--muted add-task-field-label--block-lg">
-                Priority Protocol
+                Priority
               </span>
               <div className="add-task-priority-grid" role="group" aria-label="Priority">
                 {[
@@ -229,7 +229,7 @@ function AddTaskSideSheet({ open, onClose, onSubmit }) {
 
             <div>
               <span className="add-task-field-label add-task-field-label--muted add-task-field-label--block-lg">
-                Resource Allocation
+                Assignees
               </span>
               <div className="add-task-assignees">
                 <div className="add-task-avatar" title="Elara Vance">
@@ -249,14 +249,14 @@ function AddTaskSideSheet({ open, onClose, onSubmit }) {
 
         <footer className="add-task-footer">
           <button type="submit" form={formId} className="add-task-submit">
-            Create_Task
+            Create Task
           </button>
           <button type="button" className="add-task-cancel" onClick={onClose}>
-            Cancel_Operation
+            Cancel
           </button>
           <div className="add-task-footer-meta">
-            <span>TRK_29481_ALPHA</span>
-            <span>AES-256_ACTIVE</span>
+            <span>Draft mode</span>
+            <span>Autosave enabled</span>
           </div>
         </footer>
       </aside>

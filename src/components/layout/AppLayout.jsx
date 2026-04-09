@@ -16,7 +16,7 @@ function AppLayout() {
   const navigate = useNavigate();
   const currentUser = useSelector(selectCurrentUser);
   const userName = currentUser?.name || currentUser?.fullName || "User";
-  const userEmail = currentUser?.email || "node@precision.local";
+  const userEmail = currentUser?.email || "user@company.com";
   const [logout] = useLogoutMutation();
   const initials =
     userName
@@ -45,8 +45,8 @@ function AppLayout() {
     <div className="rbac-layout">
       <aside className="rbac-sidebar">
         <div className="rbac-sidebar__brand-wrap">
-          <div className="rbac-sidebar__brand">PROGESSO</div>
-          <p className="rbac-sidebar__tag">Technical Authority</p>
+          <div className="rbac-sidebar__brand">RBAC Admin</div>
+          <p className="rbac-sidebar__tag">Access Management</p>
         </div>
         <nav className="rbac-sidebar__nav">
           <NavLink
@@ -148,7 +148,7 @@ function AppLayout() {
               <input
                 type="text"
                 className="rbac-header__search"
-                placeholder="COMMAND_SEARCH..."
+                placeholder="Search..."
               />
             </div>
           </div>
@@ -168,7 +168,7 @@ function AppLayout() {
               aria-label="Open my profile"
             >
               <span className="rbac-header__user-meta">
-                <span className="rbac-header__user-name">{currentUser?.role}</span>
+                <span className="rbac-header__user-name">{currentUser?.role || "My Profile"}</span>
                 <span className="rbac-header__user-subtitle">{userEmail}</span>
               </span>
               <span className="rbac-header__avatar" aria-hidden>
