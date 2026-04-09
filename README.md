@@ -1,16 +1,69 @@
-# React + Vite
+# RBAC Admin
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Frontend for a **role-based access control (RBAC)** admin console: users, roles, permissions, team views, and a kinetic-style dashboard. Built with React and Redux Toolkit (including RTK Query for API calls).
 
-Currently, two official plugins are available:
+## Tech stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **React 19** + **Vite 7**
+- **React Router 7** — `/login`, `/signup`, and protected app shell routes
+- **Redux Toolkit** — `auth` slice and store configuration
+- **RTK Query** — users, roles, permissions mutations/queries (`src/store/services/api.js`, `AuthServices.js`)
+- **Tailwind CSS v4** — utility styling alongside scoped CSS and design tokens (`--kp-*` in `index.css`)
+- **js-cookie** — optional persistence for auth/session handling
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Authentication** — Login and sign-up pages; protected routes via `PrivateRoute`
+- **Dashboard** — Overview metrics and activity-style layout
+- **Projects** — Kanban-style board; **New Task +** opens a glass-panel task side sheet (`AddTaskSideSheet`)
+- **Team** — Team listing and assignment-oriented UI
+- **Users / Roles / Permissions** — CRUD-oriented screens with side sheets (e.g. add user, role, permission)
+- **Settings** — Profile and app preferences entry points
+- **App shell** — Sidebar navigation and layout (`AppLayout`)
 
-## Expanding the ESLint configuration
+## Prerequisites
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Node.js** 20+ (recommended; matches current Vite/React tooling)
+
+## Environment
+
+| Variable              | Description                                      |
+| --------------------- | ------------------------------------------------ |
+| `VITE_API_BASE_URL`   | Base URL for admin API (defaults to `/api/admin`) |
+
+Create a `.env` in the project root if your API is not served from the same origin:
+
+```env
+VITE_API_BASE_URL=https://your-api.example.com/api/admin
+```
+
+## Scripts
+
+| Command        | Description              |
+| -------------- | ------------------------ |
+| `npm run dev`  | Start dev server (Vite)  |
+| `npm run build`| Production build         |
+| `npm run preview` | Preview production build |
+| `npm run lint` | Run ESLint               |
+
+## Project structure (high level)
+
+```
+src/
+  components/     # Shared UI (side sheets, layout, tables, buttons)
+  pages/          # Route-level screens
+  store/          # Redux store, slices, RTK Query services
+  theme/          # Shared theme helpers (e.g. buttons)
+  App.jsx         # Route definitions
+  main.jsx        # Store provider, router, auth rehydration
+```
+
+## Development
+
+1. Install dependencies: `npm install`
+2. Copy/configure `.env` if needed
+3. Run `npm run dev` and open the URL shown in the terminal (typically `http://localhost:5173`)
+
+## License
+
+Private project (`"private": true` in `package.json`). Adjust this section if you publish or open-source the repo.
