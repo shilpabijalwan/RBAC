@@ -9,6 +9,10 @@
 .rbac-sidebar {
   width: 256px;
   flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
   background-color: var(--rbac-sidebar-bg, var(--kp-surface-lowest, #000000));
   padding: 2rem 0 1rem;
   display: flex;
