@@ -1,32 +1,7 @@
+import { Link } from "react-router-dom";
+import { TEAM_MEMBERS } from "../data/teamDirectory";
 import "./Team.css";
 import "./shared.css";
-
-const members = [
-  {
-    name: "ELARA_VANCE",
-    role: "Lead Architecture Specialist",
-    tags: ["ADMIN", "SECURITY_CLEARANCE_01"],
-    tone: "secondary",
-  },
-  {
-    name: "KAI_SHELBY",
-    role: "Logic Operations Manager",
-    tags: ["MANAGER", "CORE_ENGINE"],
-    tone: "primary",
-  },
-  {
-    name: "LYRA_KHAN",
-    role: "Interface Logistics",
-    tags: ["MEMBER", "VISUAL_SYS"],
-    tone: "muted",
-  },
-  {
-    name: "JAX_THORNE",
-    role: "Infrastructure Stability",
-    tags: ["MEMBER", "RESTRICTED_ACCESS"],
-    tone: "error",
-  },
-];
 
 function Team() {
   return (
@@ -45,20 +20,22 @@ function Team() {
         </header>
 
         <div className="rbac-team__grid">
-          {members.map((member) => (
-            <article key={member.name} className={`rbac-team__card is-${member.tone}`}>
-              <div>
-                <h3>{member.name}</h3>
-                <p>{member.role}</p>
-                <div className="rbac-team__tags">
-                  {member.tags.map((tag) => (
-                    <span key={tag}>{tag}</span>
-                  ))}
+          {TEAM_MEMBERS.map((member) => (
+            <article key={member.slug} className={`rbac-team__card is-${member.tone}`}>
+              <Link className="rbac-team__card-link" to={`/team/${member.slug}`}>
+                <div>
+                  <h3>{member.codename}</h3>
+                  <p>{member.role}</p>
+                  <div className="rbac-team__tags">
+                    {member.tags.map((tag) => (
+                      <span key={tag}>{tag}</span>
+                    ))}
+                  </div>
                 </div>
-              </div>
-              <span className="rbac-team__arrow" aria-hidden>
-                ›
-              </span>
+                <span className="rbac-team__arrow" aria-hidden>
+                  ›
+                </span>
+              </Link>
             </article>
           ))}
         </div>

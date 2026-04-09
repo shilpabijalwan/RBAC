@@ -1,5 +1,4 @@
-import { Outlet } from "react-router-dom";
-import { NavLink } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +18,8 @@ import {
 import UpdateProfileSideSheet from "../UpdateProfileSideSheet";
 
 function AppLayout() {
+  const { pathname } = useLocation();
+  const teamNavActive = pathname === "/team" || pathname.startsWith("/team/");
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isProfileSheetOpen, setIsProfileSheetOpen] = useState(false);
   const [profileSheetKey, setProfileSheetKey] = useState(0);
@@ -148,8 +149,8 @@ function AppLayout() {
           </NavLink>
           <NavLink
             to="/team"
-            className={({ isActive }) =>
-              `rbac-sidebar__link ${isActive ? "rbac-sidebar__link--active" : ""}`
+            className={() =>
+              `rbac-sidebar__link ${teamNavActive ? "rbac-sidebar__link--active" : ""}`
             }
           >
             <span className="rbac-sidebar__icon" aria-hidden>
@@ -168,7 +169,7 @@ function AppLayout() {
             </span>
             Settings
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to="/permissions"
             className={({ isActive }) =>
               `rbac-sidebar__link ${isActive ? "rbac-sidebar__link--active" : ""}`
@@ -178,7 +179,7 @@ function AppLayout() {
               ◇
             </span>
             Permissions
-          </NavLink>
+          </NavLink> */}
           <NavLink
             to="/users"
             className={({ isActive }) =>

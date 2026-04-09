@@ -58,7 +58,7 @@ function AddUserSideSheet({ open, onClose, onSubmit }) {
         <div className="flex items-center justify-between border-b border-[rgba(65,71,91,0.2)] px-8 py-4">
           <h2
             id="add-user-sheet-title"
-            className="font-['Space_Grotesk'] text-sm font-bold uppercase tracking-[0.24em] text-(--kp-primary)"
+            className="font-['Space_Grotesk'] text-lg font-bold uppercase tracking-[0.24em] text-(--kp-primary)"
           >
             Create User
           </h2>
@@ -72,14 +72,14 @@ function AddUserSideSheet({ open, onClose, onSubmit }) {
           <div className="flex-1 overflow-y-auto p-8">
             <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
               <div className="max-w-xl">
-                <p className="max-w-lg text-sm leading-relaxed text-(--kp-on-surface-variant)">
+                <p className="max-w-lg text-md leading-relaxed text-(--kp-on-surface-variant)">
                   Create a new user profile in the Progesso system. Verify all
                   identity details through the central node before activation.
                 </p>
               </div>
-              <span className="font-['Space_Grotesk'] text-3xl tracking-[0.2em] text-[rgba(32,42,70,0.9)]">
+              {/* <span className="font-['Space_Grotesk'] text-3xl tracking-[0.2em] text-[rgba(32,42,70,0.9)]">
                 EST.2026
-              </span>
+              </span> */}
             </div>
 
             <div className="grid grid-cols-1 overflow-hidden border border-[rgba(65,71,91,0.2)] shadow-[0_30px_40px_rgba(0,0,0,0.45)] md:grid-cols-12">
@@ -97,8 +97,8 @@ function AddUserSideSheet({ open, onClose, onSubmit }) {
                       name="name"
                       type="text"
                       required
-                      placeholder="ALEXANDER VANCE"
-                      className={`${inputClass} font-['Space_Grotesk'] text-xl uppercase tracking-tight`}
+                      placeholder="Enter Full Name"
+                      className={`${inputClass} font-['Space_Grotesk'] text-sm uppercase tracking-tight pl-1`}
                     />
                   </div>
                   <div className="grid gap-6 md:grid-cols-2">
@@ -137,7 +137,7 @@ function AddUserSideSheet({ open, onClose, onSubmit }) {
                 </div>
 
                 <div className="space-y-3 border-t border-[rgba(65,71,91,0.2)] pt-6">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-(--kp-primary)">
+                  <p className="text-md font-bold uppercase tracking-[0.2em] text-(--kp-primary)">
                     Team Assignment
                   </p>
                   <div className="flex flex-wrap gap-3">
@@ -168,7 +168,7 @@ function AddUserSideSheet({ open, onClose, onSubmit }) {
               <div className="flex flex-col justify-between bg-(--kp-surface-highest) p-8 md:col-span-5">
                 <div className="space-y-8">
                   <div>
-                    <p className="mb-4 text-[10px] font-bold uppercase tracking-[0.2em] text-(--kp-tertiary)">
+                    <p className="mb-4 text-md font-bold uppercase tracking-[0.2em] text-(--kp-tertiary)">
                       Assign Structural Role
                     </p>
                     <div className="space-y-3">
@@ -180,10 +180,6 @@ function AddUserSideSheet({ open, onClose, onSubmit }) {
                         {
                           label: "Project Manager",
                           desc: "Vertical Team Oversight",
-                        },
-                        {
-                          label: "Member",
-                          desc: "Standard Operational Access",
                         },
                         {
                           label: "Team Lead",
@@ -219,7 +215,7 @@ function AddUserSideSheet({ open, onClose, onSubmit }) {
                     </div>
                   </div>
 
-                  <div>
+                  {/* <div>
                     <div className="mb-4 flex items-center justify-between">
                       <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-(--kp-secondary)">
                         Access Level Matrix
@@ -236,7 +232,7 @@ function AddUserSideSheet({ open, onClose, onSubmit }) {
                       <span>Elevated</span>
                       <span>Universal</span>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
 
                 <div className="pt-8">
