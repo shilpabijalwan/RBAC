@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
-import { TEAM_MEMBERS } from "../data/teamDirectory";
+import { TEAM_MEMBERS } from "../../data/teamDirectory";
 import "./Team.css";
-import "./shared.css";
+import "../Shared/shared.css";
 
 function Team() {
   return (

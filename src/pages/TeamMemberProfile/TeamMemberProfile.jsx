@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
-import { getTeamMemberBySlug } from "../data/teamDirectory";
+import { getTeamMemberBySlug } from "../../data/teamDirectory";
 import "./TeamMemberProfile.css";
 
 function IconArchitecture({ className }) {

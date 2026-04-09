@@ -5,7 +5,7 @@ import {
   logout as logoutAction,
   selectCurrentUser,
 } from "../../store/slices/authSlice";
-import "../../pages/shared.css";
+import "../../pages/Shared/shared.css";
 import "./AppLayout.css";
 import { useLogoutMutation } from "../../store/services/AuthServices";
 

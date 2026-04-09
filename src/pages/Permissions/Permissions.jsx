@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
-import AddPermissionSideSheet from "../components/AddPermissionSideSheet";
-import RbacTable from "../components/RbacTable";
-import { useCreatePermissionMutation } from "../store/services/api";
+import AddPermissionSideSheet from "../../components/AddPermissionSideSheet";
+import RbacTable from "../../components/RbacTable";
+import { useCreatePermissionMutation } from "../../store/services/api";
 import "./Permissions.css";
 
 function Permissions() {

@@ -1,8 +1,8 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import Button from "../components/Button";
-import "./Auth.css";
-import { useLoginMutation } from "../store/services/AuthServices";
-import { setCredentials } from "../store/slices/authSlice";
+import Button from "../../components/Button";
+import "../Auth/Auth.css";
+import { useLoginMutation } from "../../store/services/AuthServices";
+import { setCredentials } from "../../store/slices/authSlice";
 import { useDispatch } from "react-redux";
 
 const inputClass =

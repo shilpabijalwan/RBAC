@@ -1,17 +1,17 @@
 import { Routes, Route } from "react-router-dom";
 import AppLayout from "./components/layout/AppLayout";
 import PrivateRoute from "./components/PrivateRoute";
-import Dashboard from "./pages/Dashboard";
-import Roles from "./pages/Roles";
-import Permissions from "./pages/Permissions";
-import Users from "./pages/Users";
-import Projects from "./pages/Projects";
-import Team from "./pages/Team";
-import TeamMemberProfile from "./pages/TeamMemberProfile";
-import Profile from "./pages/Profile";
-import Settings from "./pages/Settings";
-import Login from "./pages/Login";
-import SignUp from "./pages/SignUp";
+import Dashboard from "./pages/Dashboard/index.jsx";
+import Roles from "./pages/Roles/index.jsx";
+import Permissions from "./pages/Permissions/index.jsx";
+import Users from "./pages/Users/index.jsx";
+import Projects from "./pages/Projects/index.jsx";
+import Team from "./pages/Team/index.jsx";
+import TeamMemberProfile from "./pages/TeamMemberProfile/index.jsx";
+import Profile from "./pages/Profile/index.jsx";
+import Settings from "./pages/Settings/index.jsx";
+import Login from "./pages/Login/index.jsx";
+import SignUp from "./pages/SignUp/index.jsx";
 import "./App.css";
 
 function App() {

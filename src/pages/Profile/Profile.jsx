@@ -1,12 +1,12 @@
 ﻿import { useCallback, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectCurrentUser, setCredentials } from "../store/slices/authSlice";
+import { selectCurrentUser, setCredentials } from "../../store/slices/authSlice";
 import {
   useGetAvailableRolesQuery,
   useUpdateProfileMutation,
   useUpdateProfileRolesMutation,
-} from "../store/services/AuthServices";
+} from "../../store/services/AuthServices";
 import "./Profile.css";
 
 function getInitialRoleIds(user) {

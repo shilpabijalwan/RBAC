@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
-import AddRoleSideSheet from "../components/AddRoleSideSheet";
-import RbacTable from "../components/RbacTable";
-import { useCreateRoleMutation } from "../store/services/api";
+import AddRoleSideSheet from "../../components/AddRoleSideSheet";
+import RbacTable from "../../components/RbacTable";
+import { useCreateRoleMutation } from "../../store/services/api";
 import "./Roles.css";
 
 function Roles() {

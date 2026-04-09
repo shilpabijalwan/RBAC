@@ -1,9 +1,9 @@
 import { useCallback, useMemo, useState } from "react";
-import AddUserSideSheet from "../components/AddUserSideSheet";
-import RbacRowActionsMenu from "../components/RbacRowActionsMenu";
-import RbacTable from "../components/RbacTable";
+import AddUserSideSheet from "../../components/AddUserSideSheet";
+import RbacRowActionsMenu from "../../components/RbacRowActionsMenu";
+import RbacTable from "../../components/RbacTable";
 import "./Users.css";
-import { useCreateUserMutation, useGetUsersQuery } from "../store/services/api";
+import { useCreateUserMutation, useGetUsersQuery } from "../../store/services/api";
 
 function Users() {
   const [addUserSheetOpen, setAddUserSheetOpen] = useState(false);

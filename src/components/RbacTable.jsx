@@ -1,4 +1,4 @@
-import "../pages/shared.css";
+import "../pages/Shared/shared.css";
 import "./RbacTable.css";
 
 /**

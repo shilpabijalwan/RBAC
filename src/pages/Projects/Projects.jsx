@@ -1,7 +1,7 @@
 import { useCallback, useState } from "react";
-import AddTaskSideSheet from "../components/AddTaskSideSheet";
+import AddTaskSideSheet from "../../components/AddTaskSideSheet";
 import "./Projects.css";
-import "./shared.css";
+import "../Shared/shared.css";
 
 const columns = [
   {

@@ -1,9 +1,9 @@
 import { useCallback, useState } from 'react';
 import { Link, useNavigate, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import { selectIsAuthenticated } from '../store/slices/authSlice';
-import Button from '../components/Button';
-import './Auth.css';
+import { selectIsAuthenticated } from '../../store/slices/authSlice';
+import Button from '../../components/Button';
+import '../Auth/Auth.css';
 
 const inputClass =
   'w-full rounded-none border border-[rgba(65,71,91,0.25)] bg-[var(--kp-surface-high)] px-3 py-2 text-[var(--kp-on-surface)] placeholder-zinc-400 focus:border-[var(--kp-secondary)] focus:outline-none focus:ring-1 focus:ring-[var(--kp-secondary)] dark:border-zinc-600 dark:bg-zinc-800 dark:text-zinc-100 dark:placeholder-zinc-500';
