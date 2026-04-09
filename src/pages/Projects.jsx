@@ -1,3 +1,5 @@
+import { useCallback, useState } from "react";
+import AddTaskSideSheet from "../components/AddTaskSideSheet";
 import "./Projects.css";
 import "./shared.css";
 
@@ -86,6 +88,13 @@ const columns = [
 ];
 
 function Projects() {
+  const [taskSheetOpen, setTaskSheetOpen] = useState(false);
+
+  const handleTaskSubmit = useCallback((payload) => {
+    // Wire to API when available
+    console.info("[Projects] task draft", payload);
+  }, []);
+
   return (
     <div className="rbac-page rbac-projects">
       <header className="rbac-projects__header">
@@ -97,11 +106,21 @@ function Projects() {
           <button type="button" className="rbac-projects__btn rbac-projects__btn--ghost">
             Filter View
           </button>
-          <button type="button" className="rbac-btn rbac-btn--primary">
+          <button
+            type="button"
+            className="rbac-btn rbac-btn--primary"
+            onClick={() => setTaskSheetOpen(true)}
+          >
             New Task +
           </button>
         </div>
       </header>
+
+      <AddTaskSideSheet
+        open={taskSheetOpen}
+        onClose={() => setTaskSheetOpen(false)}
+        onSubmit={handleTaskSubmit}
+      />
 
       <section className="rbac-projects__board">
         {columns.map((column) => (
