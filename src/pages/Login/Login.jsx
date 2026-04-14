@@ -1,4 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import Button from "../../components/Button";
 import "../Auth/Auth.css";
 import { useLoginMutation } from "../../store/services/AuthServices";
@@ -29,14 +30,14 @@ function Login() {
       const resolvedUser = response?.user ?? response?.data?.user ?? null;
       dispatch(setCredentials({ user: resolvedUser }));
       if (hasValidUser(resolvedUser)) {
+        toast.success("Logged in successfully");
         navigate(from || "/roles", { replace: true });
       } else {
-        // toast.error("Invalid credentials");
-        console.log("Invalid credentials");
+        toast.error("Invalid credentials");
       }
     } catch (error) {
       console.error(error);
-      // toast.error(error.data.message);
+      toast.error(error?.data?.message || "Login failed");
     }
   };
 

@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import toast from "react-hot-toast";
 import AddRoleSideSheet from "../../components/AddRoleSideSheet";
 import RbacTable from "../../components/RbacTable";
 import { useCreateRoleMutation } from "../../store/services/api";
@@ -11,8 +12,10 @@ function Roles() {
   const handleAddRoleSubmit = async (payload) => {
     try {
       await createRole(payload).unwrap();
+      toast.success("Role created");
     } catch (error) {
       console.log("create role error", error);
+      toast.error(error?.data?.message || "Failed to create role");
     }
   };
 

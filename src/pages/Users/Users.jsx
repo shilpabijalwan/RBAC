@@ -1,4 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
+import toast from "react-hot-toast";
 import AddUserSideSheet from "../../components/AddUserSideSheet";
 import RbacRowActionsMenu from "../../components/RbacRowActionsMenu";
 import RbacTable from "../../components/RbacTable";
@@ -12,7 +13,13 @@ function Users() {
   console.log(users);
   const handleAddUserSubmit = async (data) => {
     console.log("Add user:", data);
-    await createUser(data);
+    try {
+      await createUser(data).unwrap();
+      toast.success("User created successfully");
+      setAddUserSheetOpen(false);
+    } catch (error) {
+      toast.error(error?.data?.message || "Failed to create user");
+    }
     // setAddUserSheetOpen(false);
   };
 

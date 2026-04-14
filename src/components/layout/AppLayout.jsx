@@ -45,7 +45,7 @@ function AppLayout() {
     <div className="rbac-layout">
       <aside className="rbac-sidebar">
         <div className="rbac-sidebar__brand-wrap">
-          <div className="rbac-sidebar__brand">RBAC Admin</div>
+          <div className="rbac-sidebar__brand">PROGRESSO</div>
           <p className="rbac-sidebar__tag">Access Management</p>
         </div>
         <nav className="rbac-sidebar__nav">

@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import toast from "react-hot-toast";
 import AddPermissionSideSheet from "../../components/AddPermissionSideSheet";
 import RbacTable from "../../components/RbacTable";
 import { useCreatePermissionMutation } from "../../store/services/api";
@@ -11,8 +12,10 @@ function Permissions() {
   const handleAddPermissionSubmit = async (payload) => {
     try {
       await createPermission(payload).unwrap();
+      toast.success("Permission created");
     } catch (error) {
       console.log("create permission error", error);
+      toast.error(error?.data?.message || "Failed to create permission");
     }
   };
 
