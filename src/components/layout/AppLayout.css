@@ -64,7 +64,10 @@
 
 .rbac-sidebar__icon {
   opacity: 0.9;
-  font-size: 0.85rem;
+  width: 0.95rem;
+  height: 0.95rem;
+  stroke-width: 1.8;
+  flex-shrink: 0;
 }
 
 .rbac-sidebar__link:hover {

@@ -1,6 +1,7 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { FolderKanban, LayoutDashboard, Settings, Shield, User, Users } from "lucide-react";
 import {
   logout as logoutAction,
   selectCurrentUser,
@@ -56,9 +57,7 @@ function AppLayout() {
               `rbac-sidebar__link ${isActive ? "rbac-sidebar__link--active" : ""}`
             }
           >
-            <span className="rbac-sidebar__icon" aria-hidden>
-              ▣
-            </span>
+            <LayoutDashboard className="rbac-sidebar__icon" aria-hidden />
             Dashboard
           </NavLink>
           <NavLink
@@ -67,9 +66,7 @@ function AppLayout() {
               `rbac-sidebar__link ${isActive ? "rbac-sidebar__link--active" : ""}`
             }
           >
-            <span className="rbac-sidebar__icon" aria-hidden>
-              ◫
-            </span>
+            <Shield className="rbac-sidebar__icon" aria-hidden />
             Roles
           </NavLink>
           <NavLink
@@ -78,9 +75,7 @@ function AppLayout() {
               `rbac-sidebar__link ${isActive ? "rbac-sidebar__link--active" : ""}`
             }
           >
-            <span className="rbac-sidebar__icon" aria-hidden>
-              ◧
-            </span>
+            <FolderKanban className="rbac-sidebar__icon" aria-hidden />
             Projects
           </NavLink>
           <NavLink
@@ -89,9 +84,7 @@ function AppLayout() {
               `rbac-sidebar__link ${teamNavActive ? "rbac-sidebar__link--active" : ""}`
             }
           >
-            <span className="rbac-sidebar__icon" aria-hidden>
-              ◉
-            </span>
+            <Users className="rbac-sidebar__icon" aria-hidden />
             Team
           </NavLink>
           <NavLink
@@ -100,9 +93,7 @@ function AppLayout() {
               `rbac-sidebar__link ${isActive ? "rbac-sidebar__link--active" : ""}`
             }
           >
-            <span className="rbac-sidebar__icon" aria-hidden>
-              ⚙
-            </span>
+            <Settings className="rbac-sidebar__icon" aria-hidden />
             Settings
           </NavLink>
           {/* <NavLink
@@ -122,9 +113,7 @@ function AppLayout() {
               `rbac-sidebar__link ${isActive ? "rbac-sidebar__link--active" : ""}`
             }
           >
-            <span className="rbac-sidebar__icon" aria-hidden>
-              ◎
-            </span>
+            <User className="rbac-sidebar__icon" aria-hidden />
             Users
           </NavLink>
         </nav>
