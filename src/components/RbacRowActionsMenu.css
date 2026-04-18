@@ -4,6 +4,7 @@
   position: relative;
   display: inline-flex;
   justify-content: flex-end;
+  font-family: var(--font-body, "Inter", "Segoe UI", Arial, sans-serif);
 }
 
 .rbac-row-actions__trigger {

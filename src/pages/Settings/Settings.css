@@ -3,40 +3,38 @@
   margin: 0 auto;
 }
 
-.rbac-settings__hero {
-  margin-bottom: 2rem;
-}
-
-.rbac-settings__kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  font-size: 0.62rem;
-  color: var(--kp-secondary, #62fae3);
-  font-family: var(--font-display, "Space Grotesk", sans-serif);
-}
-
-.rbac-settings__dot {
-  width: 0.45rem;
-  height: 0.45rem;
-  background: var(--kp-secondary, #62fae3);
-  box-shadow: 0 0 10px rgba(98, 250, 227, 0.35);
-}
-
-.rbac-settings__hero h1 {
-  margin: 0;
-  font-size: clamp(2rem, 5vw, 3rem);
-  letter-spacing: -0.02em;
-  text-transform: uppercase;
-}
-
-.rbac-settings__hero p {
-  margin: 0.85rem 0 0;
+.rbac-settings__lede,
+.rbac-settings__hint {
+  font-family: var(--font-body, "Inter", "Segoe UI", Arial, sans-serif);
+  font-weight: 400;
+  font-size: 0.9375rem;
+  line-height: 1.55;
   max-width: 760px;
   color: var(--kp-on-surface-variant, #a5aac2);
+}
+
+.rbac-settings__lede {
+  margin: 0 0 0.65rem;
+}
+
+.rbac-settings__lede strong {
+  color: var(--kp-on-surface, #dfe4fe);
+  font-weight: 600;
+}
+
+.rbac-settings__hint {
+  margin: 0 0 1.75rem;
+}
+
+.rbac-settings__hint-link {
+  font-family: inherit;
+  font-weight: 500;
+  color: var(--kp-secondary, #62fae3);
+  text-decoration: none;
+}
+
+.rbac-settings__hint-link:hover {
+  text-decoration: underline;
 }
 
 .rbac-settings__layout {
@@ -77,6 +75,25 @@
   border-bottom-color: var(--kp-secondary, #62fae3);
 }
 
+.rbac-settings__field--readonly > span {
+  display: block;
+  margin-bottom: 0.45rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 0.6rem;
+  color: var(--kp-primary, #ba9eff);
+  font-weight: 700;
+}
+
+.rbac-settings__field--readonly > p {
+  margin: 0;
+  padding: 0.65rem 0.9rem;
+  background: var(--kp-surface-low, #0f162b);
+  color: var(--kp-on-surface, #dfe4fe);
+  border-bottom: 1px solid rgba(65, 71, 91, 0.5);
+  font-size: 0.95rem;
+}
+
 .rbac-settings__integrity {
   border-left: 2px solid var(--kp-primary, #ba9eff);
   background: var(--kp-surface-high, #171f36);
@@ -88,6 +105,10 @@
 .rbac-settings__integrity h3 {
   margin: 0 0 0.4rem;
   font-size: 1rem;
+  font-family: var(--font-display, "Space Grotesk", sans-serif);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--kp-on-surface, #dfe4fe);
 }
 
 .rbac-settings__integrity p {
@@ -130,6 +151,10 @@
 .rbac-settings__permissions-head h2 {
   margin: 0;
   font-size: 1.1rem;
+  font-family: var(--font-display, "Space Grotesk", sans-serif);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--kp-on-surface, #dfe4fe);
 }
 
 .rbac-settings__permissions-head button {
@@ -152,56 +177,39 @@
   padding-bottom: 0.35rem;
 }
 
-.rbac-settings__items {
-  display: grid;
-  gap: 0.75rem;
+.rbac-settings__group--roles {
+  min-height: 8rem;
 }
 
-.rbac-settings__item {
+.rbac-settings__roles-status {
+  margin: 0;
+  padding: 0.5rem 0;
+  font-size: 0.85rem;
+  color: var(--kp-on-surface-variant, #a5aac2);
+}
+
+.rbac-settings__roles-status--error {
+  color: #f87171;
+}
+
+.rbac-settings__roles {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.rbac-settings__role-row {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
+  gap: 0.65rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  color: var(--kp-on-surface, #dfe4fe);
 }
 
-.rbac-settings__item span {
-  display: block;
-}
-
-.rbac-settings__item span:first-child {
-  font-size: 0.86rem;
-}
-
-.rbac-settings__item p {
-  margin: 0.2rem 0 0;
-  color: var(--kp-on-surface-variant, #a5aac2);
-  font-size: 0.73rem;
-}
-
-.rbac-settings__toggle {
-  width: 2.75rem;
-  height: 1.25rem;
-  background: var(--kp-surface-highest, #202a46);
-  position: relative;
-  flex-shrink: 0;
-}
-
-.rbac-settings__toggle span {
-  position: absolute;
-  left: 0.12rem;
-  top: 0.12rem;
-  width: 1.25rem;
+.rbac-settings__role-row input {
+  width: 1rem;
   height: 1rem;
-  background: var(--kp-on-surface-variant, #a5aac2);
-}
-
-.rbac-settings__toggle.is-on {
-  background: rgba(98, 250, 227, 0.15);
-}
-
-.rbac-settings__toggle.is-on span {
-  left: calc(100% - 1.37rem);
-  background: var(--kp-secondary, #62fae3);
+  accent-color: var(--kp-secondary, #62fae3);
 }
 
 .rbac-settings__actions {
@@ -233,7 +241,13 @@
   text-transform: uppercase;
   letter-spacing: 0.14em;
   font-size: 0.66rem;
-  font-family: var(--font-display, "Space Grotesk", sans-serif);
+  font-family: var(--font-body, "Inter", "Segoe UI", Arial, sans-serif);
+  cursor: pointer;
+}
+
+.rbac-settings__save:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 @media (max-width: 980px) {

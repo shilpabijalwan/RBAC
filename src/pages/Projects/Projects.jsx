@@ -97,10 +97,10 @@ function Projects() {
 
   return (
     <div className="rbac-page rbac-projects">
-      <header className="rbac-projects__header">
+      <header className="rbac-projects__header rbac-page-hero__header">
         <div>
-          <h1 className="rbac-projects__title">Project Board</h1>
-          <p className="rbac-projects__subtitle">Track active work by status</p>
+          <h1 className="rbac-page-hero__title">Project Board</h1>
+          <p className="rbac-page-hero__subtitle">Track active work by status</p>
         </div>
         <div className="rbac-projects__actions">
           <button type="button" className="rbac-projects__btn rbac-projects__btn--ghost">

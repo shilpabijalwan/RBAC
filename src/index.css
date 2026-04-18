@@ -1,6 +1,14 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: dark;
+
+  /* Scrollbars (Firefox + fallbacks; WebKit below) */
+  --scrollbar-track: var(--kp-surface-low, #0f162b);
+  --scrollbar-thumb: rgba(186, 158, 255, 0.38);
+  --scrollbar-thumb-hover: rgba(186, 158, 255, 0.58);
+  --scrollbar-size: 10px;
+
   /* Typography */
   --font-display: "Space Grotesk", "Inter", "Segoe UI", Arial, sans-serif;
   --font-body: "Inter", "Segoe UI", Arial, sans-serif;
@@ -44,12 +52,49 @@ a:hover {
   color: #d7c6ff;
 }
 
+html {
+  height: 100%;
+  overflow-x: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
 body {
   margin: 0;
   min-width: 320px;
-  min-height: 100vh;
+  min-height: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
   background: var(--kp-surface);
   color: var(--kp-on-surface);
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+
+/* WebKit (Chrome, Edge, Safari) — viewport + nested scroll areas */
+*::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--scrollbar-thumb);
+  border-radius: 999px;
+  border: 2px solid var(--scrollbar-track);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: var(--scrollbar-thumb-hover);
+}
+
+*::-webkit-scrollbar-corner {
+  background: var(--scrollbar-track);
 }
 
 h1 {

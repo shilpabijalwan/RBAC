@@ -4,6 +4,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import Dashboard from "./pages/Dashboard/index.jsx";
 import Roles from "./pages/Roles/index.jsx";
 import Permissions from "./pages/Permissions/index.jsx";
+import PermissionEditor from "./pages/PermissionEditor/index.jsx";
 import Users from "./pages/Users/index.jsx";
 import Projects from "./pages/Projects/index.jsx";
 import Team from "./pages/Team/index.jsx";
@@ -16,6 +17,7 @@ import "./App.css";
 
 function App() {
   return (
+    <div className="app-view">
     <Routes>
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<SignUp />} />
@@ -29,10 +31,13 @@ function App() {
           <Route path="settings" element={<Settings />} />
           <Route path="roles" element={<Roles />} />
           <Route path="permissions" element={<Permissions />} />
+          <Route path="permissions/new" element={<PermissionEditor />} />
+          <Route path="permissions/manage" element={<PermissionEditor />} />
           <Route path="users" element={<Users />} />
         </Route>
       </Route>
     </Routes>
+    </div>
   );
 }
 

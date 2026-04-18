@@ -1,21 +1,279 @@
-/* Roles page - scoped to .rbac-roles */
+/* Roles page — scoped to .rbac-roles */
 
-.rbac-roles__toolbar {
-  margin-top: 1.25rem;
-  margin-bottom: 1rem;
+.rbac-roles__stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
 }
 
-.rbac-roles__table-wrap {
-  overflow-x: auto;
-  border-radius: 8px;
-  border: 1px solid var(--rbac-table-border, #3d4250);
-  background-color: var(--rbac-table-bg, #2d323d);
-}
-
-@media (prefers-color-scheme: light) {
-  .rbac-roles__table-wrap {
-    --rbac-table-border: #dadce0;
-    --rbac-table-bg: #ffffff;
+@media (max-width: 900px) {
+  .rbac-roles__stats {
+    grid-template-columns: 1fr;
   }
 }
- 
+
+.rbac-roles__stat {
+  position: relative;
+  padding: 1rem 1.1rem;
+  border: 1px solid rgba(65, 71, 91, 0.45);
+  background: linear-gradient(160deg, var(--kp-surface-high, #171f36) 0%, var(--kp-surface-low, #0f162b) 100%);
+  overflow: hidden;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.rbac-roles__stat:hover {
+  border-color: rgba(186, 158, 255, 0.35);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+.rbac-roles__stat--accent {
+  background: linear-gradient(
+    155deg,
+    rgba(98, 250, 227, 0.08) 0%,
+    var(--kp-surface-high, #171f36) 45%,
+    var(--kp-surface-low, #0f162b) 100%
+  );
+}
+
+.rbac-roles__stat-label {
+  display: block;
+  font-size: 0.58rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--kp-on-surface-variant, #a5aac2);
+  margin-bottom: 0.35rem;
+}
+
+.rbac-roles__stat-value {
+  display: block;
+  font-size: 1.85rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  color: var(--kp-on-surface, #dfe4fe);
+  letter-spacing: -0.02em;
+}
+
+.rbac-roles__stat-hint {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.72rem;
+  color: var(--kp-on-surface-variant, #a5aac2);
+}
+
+.rbac-roles__stat-copy {
+  margin: 0.25rem 0 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  color: var(--kp-on-surface-variant, #a5aac2);
+}
+
+.rbac-roles__stat-link {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--kp-secondary, #62fae3);
+  text-decoration: none;
+}
+
+.rbac-roles__stat-link:hover {
+  text-decoration: underline;
+}
+
+.rbac-roles__toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem 1.15rem;
+  border: 1px solid rgba(65, 71, 91, 0.4);
+  background: var(--kp-surface-high, #171f36);
+}
+
+.rbac-roles__toolbar-copy {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  min-width: min(100%, 280px);
+}
+
+.rbac-roles__toolbar-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  color: var(--kp-primary, #ba9eff);
+  flex-shrink: 0;
+  margin-top: 0.15rem;
+}
+
+.rbac-roles__toolbar-title {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--kp-on-surface, #dfe4fe);
+}
+
+.rbac-roles__toolbar-sub {
+  margin: 0.2rem 0 0;
+  font-size: 0.8rem;
+  color: var(--kp-on-surface-variant, #a5aac2);
+}
+
+.rbac-roles__cta {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.72rem;
+  padding: 0.65rem 1.25rem;
+}
+
+.rbac-roles__surface {
+  position: relative;
+  border: 1px solid rgba(65, 71, 91, 0.45);
+  border-radius: 0;
+  background: var(--kp-surface-low, #0f162b);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.35);
+  padding: 0;
+  overflow: hidden;
+}
+
+.rbac-roles__surface-heading {
+  margin: 0;
+  padding: 0.85rem 1.15rem;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--kp-on-surface-variant, #a5aac2);
+  border-bottom: 1px solid rgba(65, 71, 91, 0.35);
+  background: var(--kp-surface-highest, #202a46);
+  font-weight: 600;
+}
+
+.rbac-roles__table-wrap.rbac-table-wrap {
+  border-radius: 0;
+  outline: none;
+  border: none;
+  box-shadow: none;
+}
+
+.rbac-roles__pills {
+  gap: 0.35rem;
+}
+
+.rbac-roles__pill {
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  border: 1px solid rgba(186, 158, 255, 0.25);
+  background: rgba(186, 158, 255, 0.12);
+  color: var(--kp-on-surface, #dfe4fe);
+}
+
+.rbac-roles__pill--muted {
+  border-color: rgba(65, 71, 91, 0.5);
+  background: rgba(15, 22, 43, 0.6);
+  color: var(--kp-on-surface-variant, #a5aac2);
+  font-style: italic;
+  letter-spacing: 0.02em;
+}
+
+.rbac-roles__row-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.rbac-roles__action-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--kp-on-surface-variant, #a5aac2);
+  border: 1px dashed rgba(65, 71, 91, 0.6);
+  cursor: default;
+}
+
+.rbac-roles__empty {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 3rem 1.5rem 3.25rem;
+  min-height: 320px;
+  justify-content: center;
+}
+
+.rbac-roles__empty-glow {
+  position: absolute;
+  inset: 20% 15% auto;
+  height: 140px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(186, 158, 255, 0.18) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.rbac-roles__empty-icon-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4.5rem;
+  height: 4.5rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid rgba(98, 250, 227, 0.35);
+  background: rgba(23, 31, 54, 0.85);
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2), 0 12px 32px rgba(0, 0, 0, 0.35);
+}
+
+.rbac-roles__empty-icon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--kp-secondary, #62fae3);
+}
+
+.rbac-roles__empty-title {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--kp-on-surface, #dfe4fe);
+  letter-spacing: -0.02em;
+}
+
+.rbac-roles__empty-text {
+  margin: 0.65rem auto 0;
+  max-width: 26rem;
+  font-size: 0.88rem;
+  line-height: 1.55;
+  color: var(--kp-on-surface-variant, #a5aac2);
+}
+
+.rbac-roles__empty-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+}
+
+.rbac-roles__empty-btn {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.68rem;
+  padding: 0.7rem 1.35rem;
+}
+
+.rbac-roles__empty-link {
+  font-size: 0.82rem;
+  color: var(--kp-primary, #ba9eff);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.rbac-roles__empty-link:hover {
+  text-decoration: underline;
+}

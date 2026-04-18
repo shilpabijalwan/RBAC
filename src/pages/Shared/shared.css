@@ -1,5 +1,9 @@
 /* Shared page and table styles - scoped to .rbac-page and .rbac-table */
 
+.rbac-page {
+  font-family: var(--font-body, "Inter", "Segoe UI", Arial, sans-serif);
+}
+
 .rbac-page__header {
   margin-bottom: 0.25rem;
 }
@@ -18,47 +22,147 @@
   color: var(--rbac-page-subtitle, var(--kp-on-surface-variant, #a5aac2));
 }
 
+/* Page hero title + subtitle (aligned with Team Directory) */
+.rbac-page-hero__title {
+  margin: 0;
+  font-family: var(--font-display, "Space Grotesk", sans-serif);
+  letter-spacing: -0.02em;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  color: var(--kp-on-surface, #dfe4fe);
+}
+
+.rbac-page-hero__subtitle {
+  margin: 0.45rem 0 0;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--kp-on-surface-variant, #a5aac2);
+}
+
+.rbac-page-hero__header {
+  margin-bottom: 1.25rem;
+}
+
 /* Shared table */
+.rbac-table-wrap,
+.rbac-table {
+  font-family: var(--font-body, "Inter", "Segoe UI", Arial, sans-serif);
+}
+
 .rbac-table {
   width: 100%;
-  border-collapse: collapse;
-  font-size: 0.9375rem;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 0.875rem;
+  line-height: 1.45;
 }
 
-.rbac-table th,
-.rbac-table td {
-  padding: 0.75rem 1rem;
+.rbac-table thead th {
+  padding: 0.75rem 1.15rem;
   text-align: left;
-  border-bottom: none;
-}
-
-.rbac-table th {
+  font-size: 0.62rem;
   font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
   color: var(--rbac-table-th, var(--kp-on-surface-variant, #a5aac2));
-  background-color: var(--rbac-table-th-bg, var(--kp-surface-highest, #202a46));
+  background: linear-gradient(
+    180deg,
+    var(--rbac-table-th-bg, var(--kp-surface-highest, #202a46)) 0%,
+    rgba(15, 22, 43, 0.92) 100%
+  );
+  border-bottom: 1px solid rgba(65, 71, 91, 0.55);
+  white-space: nowrap;
+  vertical-align: middle;
 }
 
-.rbac-table tbody tr:last-child td {
+.rbac-table tbody td {
+  padding: 0.85rem 1.15rem;
+  text-align: left;
+  vertical-align: middle;
+  color: var(--kp-on-surface, #dfe4fe);
+  border-bottom: 1px solid rgba(65, 71, 91, 0.35);
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+
+.rbac-table tbody tr:last-child:not(.rbac-table__row--banner) td {
   border-bottom: none;
 }
 
-.rbac-table tbody tr:nth-child(odd) td {
-  background: var(--rbac-table-row-odd, var(--kp-surface-high, #171f36));
+.rbac-table tbody tr:nth-child(odd):not(.rbac-table__row--banner) td {
+  background: var(--rbac-table-row-odd, rgba(23, 31, 54, 0.55));
 }
 
-.rbac-table tbody tr:nth-child(even) td {
-  background: var(--rbac-table-row-even, var(--kp-surface-low, #0f162b));
+.rbac-table tbody tr:nth-child(even):not(.rbac-table__row--banner) td {
+  background: var(--rbac-table-row-even, rgba(15, 22, 43, 0.65));
 }
 
-.rbac-table__empty {
-  color: var(--rbac-table-empty, var(--kp-on-surface-variant, #a5aac2));
-  font-style: italic;
-  padding: 2rem 1rem;
+.rbac-table tbody tr:not(.rbac-table__row--banner):hover td {
+  background: rgba(186, 158, 255, 0.07);
+}
+
+.rbac-table tbody td:first-child {
+  font-weight: 500;
+  color: var(--kp-on-surface, #f0f2ff);
+}
+
+.rbac-table tbody td:last-child {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.rbac-table__row--banner td {
+  border-bottom: none !important;
+  background: var(--kp-surface-low, #0f162b) !important;
+}
+
+.rbac-table__banner {
+  padding: 2.75rem 1.5rem;
   text-align: center;
+  vertical-align: middle;
+}
+
+.rbac-table__banner--loading .rbac-table__banner-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 500;
+  color: var(--kp-on-surface-variant, #a5aac2);
+}
+
+.rbac-table__banner--loading .rbac-table__banner-inner::before {
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid rgba(186, 158, 255, 0.25);
+  border-top-color: var(--kp-primary, #ba9eff);
+  border-radius: 50%;
+  animation: rbac-table-spin 0.7s linear infinite;
+}
+
+.rbac-table__banner--empty .rbac-table__banner-inner {
+  display: block;
+  max-width: 28rem;
+  margin: 0 auto;
+  font-size: 0.9rem;
+  font-style: normal;
+  line-height: 1.5;
+  color: var(--rbac-table-empty, var(--kp-on-surface-variant, #a5aac2));
+}
+
+@keyframes rbac-table-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* Shared button - used in toolbars */
 .rbac-btn {
+  font-family: var(--font-body, "Inter", "Segoe UI", Arial, sans-serif);
   padding: 0.5rem 1rem;
   font-size: 0.9375rem;
   font-weight: 500;

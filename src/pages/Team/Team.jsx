@@ -9,8 +9,8 @@ function Team() {
       <section className="rbac-team__main">
         <header className="rbac-team__header">
           <div>
-            <h1 className="rbac-team__title">Team Directory</h1>
-            <p className="rbac-team__subtitle">
+            <h1 className="rbac-page-hero__title">Team Directory</h1>
+            <p className="rbac-page-hero__subtitle">
               Active members: 128 / key contributors highlighted
             </p>
           </div>

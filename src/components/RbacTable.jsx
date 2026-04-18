@@ -50,20 +50,20 @@ function RbacTable({
         </thead>
         <tbody>
           {isLoading ? (
-            <tr>
-              <td colSpan={colCount} className="rbac-table__empty">
-                {loadingMessage}
+            <tr className="rbac-table__row rbac-table__row--banner">
+              <td colSpan={colCount} className="rbac-table__banner rbac-table__banner--loading">
+                <span className="rbac-table__banner-inner">{loadingMessage}</span>
               </td>
             </tr>
           ) : !data.length ? (
-            <tr>
-              <td colSpan={colCount} className="rbac-table__empty">
-                {emptyMessage}
+            <tr className="rbac-table__row rbac-table__row--banner">
+              <td colSpan={colCount} className="rbac-table__banner rbac-table__banner--empty">
+                <span className="rbac-table__banner-inner">{emptyMessage}</span>
               </td>
             </tr>
           ) : (
             data.map((row) => (
-              <tr key={getRowKey(row)}>
+              <tr key={getRowKey(row)} className="rbac-table__row">
                 {columns.map((col) => (
                   <td key={col.id}>{renderCell(row, col)}</td>
                 ))}

@@ -1,7 +1,7 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { FolderKanban, LayoutDashboard, Settings, Shield, User, Users } from "lucide-react";
+import { FolderKanban, KeyRound, LayoutDashboard, Settings, Shield, User, Users } from "lucide-react";
 import {
   logout as logoutAction,
   selectCurrentUser,
@@ -13,6 +13,9 @@ import { useLogoutMutation } from "../../store/services/AuthServices";
 function AppLayout() {
   const { pathname } = useLocation();
   const teamNavActive = pathname === "/team" || pathname.startsWith("/team/");
+  const permissionsNavActive =
+    pathname === "/permissions" ||
+    pathname.startsWith("/permissions/");
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const currentUser = useSelector(selectCurrentUser);
@@ -96,17 +99,15 @@ function AppLayout() {
             <Settings className="rbac-sidebar__icon" aria-hidden />
             Settings
           </NavLink>
-          {/* <NavLink
+          <NavLink
             to="/permissions"
-            className={({ isActive }) =>
-              `rbac-sidebar__link ${isActive ? "rbac-sidebar__link--active" : ""}`
+            className={() =>
+              `rbac-sidebar__link ${permissionsNavActive ? "rbac-sidebar__link--active" : ""}`
             }
           >
-            <span className="rbac-sidebar__icon" aria-hidden>
-              ◇
-            </span>
+            <KeyRound className="rbac-sidebar__icon" aria-hidden />
             Permissions
-          </NavLink> */}
+          </NavLink>
           <NavLink
             to="/users"
             className={({ isActive }) =>

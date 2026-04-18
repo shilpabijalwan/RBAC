@@ -1,27 +1,36 @@
 /* RbacTable shell – scoped to .rbac-table-wrap */
 
 .rbac-table-wrap {
+  font-family: var(--font-body, "Inter", "Segoe UI", Arial, sans-serif);
   overflow-x: auto;
   border-radius: 0;
-  outline: 1px solid var(--rbac-table-border, var(--kp-outline-ghost, rgba(65, 71, 91, 0.15)));
+  border: 1px solid var(--rbac-table-border, rgba(65, 71, 91, 0.4));
   background-color: var(--rbac-table-bg, var(--kp-surface-high, #171f36));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
 .rbac-table__role-pills {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.35rem;
+  justify-content: flex-start;
 }
 
 .rbac-table__role-pill {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   max-width: max-content;
-  padding: 0.125rem 0.5rem;
-  font-size: 0.75rem;
-  line-height: 1.25;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.7rem;
+  line-height: 1.3;
   font-weight: 500;
+  letter-spacing: 0.03em;
   color: var(--rbac-role-pill-text, #e8eaed);
-  background-color: var(--rbac-role-pill-bg, #394867);
-  border: none;
-  border-radius: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(57, 72, 103, 0.95) 0%,
+    rgba(32, 42, 70, 0.98) 100%
+  );
+  border: 1px solid rgba(186, 158, 255, 0.22);
+  border-radius: 999px;
 }

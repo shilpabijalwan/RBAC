@@ -17,21 +17,6 @@
   margin-bottom: 1.25rem;
 }
 
-.rbac-team__title {
-  margin: 0;
-  font-family: var(--font-display, "Space Grotesk", sans-serif);
-  letter-spacing: -0.02em;
-  font-size: clamp(2rem, 4.5vw, 3rem);
-}
-
-.rbac-team__subtitle {
-  margin: 0.45rem 0 0;
-  font-size: 0.68rem;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--kp-on-surface-variant, #a5aac2);
-}
-
 .rbac-team__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));

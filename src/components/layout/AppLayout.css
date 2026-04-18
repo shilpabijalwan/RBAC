@@ -2,8 +2,10 @@
 
 .rbac-layout {
   display: flex;
-  min-height: 100vh;
+  flex: 1;
+  min-height: 0;
   width: 100%;
+  overflow: hidden;
 }
 
 .rbac-sidebar {
@@ -11,8 +13,11 @@
   flex-shrink: 0;
   position: sticky;
   top: 0;
-  height: 100vh;
+  align-self: stretch;
+  height: auto;
+  max-height: 100%;
   overflow-y: auto;
+  overflow-x: hidden;
   background-color: var(--rbac-sidebar-bg, var(--kp-surface-lowest, #000000));
   padding: 2rem 0 1rem;
   display: flex;
@@ -111,6 +116,10 @@
 .rbac-main {
   flex: 1;
   min-width: 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   padding: 0;
   background-color: var(--rbac-main-bg, var(--kp-surface, #070d1f));
 }
@@ -279,7 +288,12 @@
 }
 
 .rbac-content {
+  flex: 1;
+  min-height: 0;
+  overflow-x: auto;
+  overflow-y: auto;
   padding: 2rem;
+  overscroll-behavior: contain;
 }
 
 @media (max-width: 900px) {
