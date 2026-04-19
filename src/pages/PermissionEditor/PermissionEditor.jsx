@@ -20,28 +20,48 @@ function PermissionEditor() {
   const [selectedModule, setSelectedModule] = useState(
     PERMISSION_MODULES[0]?.value ?? "",
   );
-  const [selectedAction, setSelectedAction] = useState(
-    PERMISSION_ACTIONS[0]?.value ?? "",
+  const [selectedActions, setSelectedActions] = useState(
+    PERMISSION_ACTIONS[0]?.value ? [PERMISSION_ACTIONS[0].value] : [],
   );
 
-  const generatedKey = useMemo(
-    () => `${selectedModule}:${selectedAction}`,
-    [selectedAction, selectedModule],
-  );
+  const generatedKey = useMemo(() => {
+    if (!selectedActions.length) return "";
+
+    return selectedActions
+      .map((action) => `${selectedModule}:${action}`)
+      .join(", ");
+  }, [selectedActions, selectedModule]);
+
+  const handleActionToggle = (actionValue) => {
+    setSelectedActions((prevActions) => {
+      if (prevActions.includes(actionValue)) {
+        // Keep at least one action selected for predictable payload shape.
+        if (prevActions.length === 1) return prevActions;
+        return prevActions.filter((item) => item !== actionValue);
+      }
+
+      return [...prevActions, actionValue];
+    });
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
 
     const moduleName = String(formData.get("module") ?? "").trim();
-    const actionName = String(formData.get("action") ?? "").trim();
-    const baseKey = `${moduleName}:${actionName}`;
+    const actionNames = formData
+      .getAll("action")
+      .map((item) => String(item ?? "").trim())
+      .filter(Boolean);
+    const baseKeys = actionNames.map((actionName) => `${moduleName}:${actionName}`);
+    const primaryAction = actionNames[0] ?? "";
+    const primaryKey = baseKeys[0] ?? "";
     const extraPermissionsRaw = String(formData.get("extraKeys") ?? "");
     const extraPermissions = extraPermissionsRaw
       .split(",")
       .map((item) => item.trim())
       .filter(Boolean);
-    const mergedPermissions = [...new Set([baseKey, ...extraPermissions])];
+    const mergedPermissions = [...new Set([...baseKeys, ...extraPermissions])];
 
     if (isUpdateRoute) {
       toast.success(
@@ -53,11 +73,10 @@ function PermissionEditor() {
     try {
       await createPermission({
         name: mergedPermissions,
-        key: baseKey,
+        // key: primaryKey,
         module: moduleName,
-        action: actionName,
-        keys: mergedPermissions,
-        description: formData.get("description") ?? "",
+        // action: primaryAction,
+        // keys: mergedPermissions,
       }).unwrap();
 
       toast.success("Permission created");
@@ -110,44 +129,23 @@ function PermissionEditor() {
             </select>
           </label>
 
-          <label
-            className="permission-editor__field"
-            htmlFor="permission-editor-action"
-          >
+          <div className="permission-editor__field">
             <span>Action</span>
-            <select
-              id="permission-editor-action"
-              name="action"
-              value={selectedAction}
-              onChange={(event) => setSelectedAction(event.target.value)}
-            >
+            <div className="permission-editor__checkbox-group" role="group" aria-label="Action">
               {PERMISSION_ACTIONS.map((action) => (
-                <option key={action.value} value={action.value}>
-                  {action.label}
-                </option>
+                <label key={action.value} className="permission-editor__checkbox-item">
+                  <input
+                    type="checkbox"
+                    name="action"
+                    value={action.value}
+                    checked={selectedActions.includes(action.value)}
+                    onChange={() => handleActionToggle(action.value)}
+                  />
+                  <span>{action.label}</span>
+                </label>
               ))}
-            </select>
-          </label>
-
-          {/* <label
-            className="permission-editor__field"
-            htmlFor="permission-editor-scope"
-          >
-            <span>Scope</span>
-            <select
-              id="permission-editor-scope"
-              name="scope"
-              value={selectedScope}
-              onChange={(event) => setSelectedScope(event.target.value)}
-            >
-              {PERMISSION_SCOPES.map((scopeName) => (
-                <option key={scopeName} value={scopeName}>
-                  {scopeName}
-                </option>
-              ))}
-            </select>
-          </label> */}
-
+            </div>
+          </div>
           <label
             className="permission-editor__field permission-editor__field--full"
             htmlFor="permission-editor-key"
@@ -160,33 +158,6 @@ function PermissionEditor() {
               readOnly
             />
           </label>
-
-          {/* <label
-            className="permission-editor__field permission-editor__field--full"
-            htmlFor="permission-editor-description"
-          >
-            <span>Description</span>
-            <textarea
-              id="permission-editor-description"
-              name="description"
-              rows={4}
-              placeholder="What this permission allows..."
-            />
-          </label> */}
-
-          {/* <label
-            className="permission-editor__field permission-editor__field--full"
-            htmlFor="permission-editor-extra-keys"
-          >
-            <span>Other Permission Keys</span>
-            <input
-              id="permission-editor-extra-keys"
-              name="extraKeys"
-              type="text"
-              placeholder="Add extra keys, comma separated"
-            />
-            <small>Example: user.read.all, audit.manage.org</small>
-          </label> */}
         </div>
 
         <footer className="permission-editor__actions">

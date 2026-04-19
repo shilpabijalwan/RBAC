@@ -9,7 +9,7 @@
 }
 
 .rbac-sidebar {
-  width: 256px;
+  width: 200px;
   flex-shrink: 0;
   position: sticky;
   top: 0;
