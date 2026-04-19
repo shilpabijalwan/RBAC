@@ -1,5 +1,6 @@
 .permission-editor {
   max-width: 860px;
+  
 }
 
 .permission-editor__top {
@@ -13,6 +14,9 @@
   font-size: 0.85rem;
   cursor: pointer;
   padding: 0.25rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 .permission-editor__back:hover {
@@ -22,13 +26,18 @@
 .permission-editor__form {
   border: 1px solid var(--kp-line, rgba(65, 71, 91, 0.35));
   background: var(--kp-surface-low, #0f162b);
+  display: flex;
+  flex-direction: column;
+  min-height: clamp(26rem, 62vh, 44rem);
 }
 
 .permission-editor__grid {
+  flex: 1;
   padding: 1rem;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1rem;
+  align-content: start;
 }
 
 .permission-editor__field {
@@ -54,11 +63,13 @@
   border: 1px solid rgba(65, 71, 91, 0.45);
   background: var(--kp-surface-high, #171f36);
   color: var(--kp-on-surface, #dfe4fe);
-  padding: 0.65rem 0.8rem;
+  padding: 0.75rem 0.85rem;
   font-size: 0.93rem;
+  min-height: 2.75rem;
 }
 
 .permission-editor__field textarea {
+  min-height: 8rem;
   resize: vertical;
 }
 

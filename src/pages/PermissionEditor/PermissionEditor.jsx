@@ -4,10 +4,10 @@ import toast from "react-hot-toast";
 import {
   PERMISSION_ACTIONS,
   PERMISSION_MODULES,
-  PERMISSION_SCOPES,
 } from "../../constants/constants";
 import { useCreatePermissionMutation } from "../../store/services/api";
 import "./PermissionEditor.css";
+import { ArrowLeft } from "lucide-react";
 
 function PermissionEditor() {
   const navigate = useNavigate();
@@ -17,13 +17,16 @@ function PermissionEditor() {
   const isCreateRoute = pathname.endsWith("/permissions/new");
   const isUpdateRoute = pathname.endsWith("/permissions/manage");
 
-  const [selectedModule, setSelectedModule] = useState(PERMISSION_MODULES[0]);
-  const [selectedAction, setSelectedAction] = useState(PERMISSION_ACTIONS[0]);
-  const [selectedScope, setSelectedScope] = useState(PERMISSION_SCOPES[3]);
+  const [selectedModule, setSelectedModule] = useState(
+    PERMISSION_MODULES[0]?.value ?? "",
+  );
+  const [selectedAction, setSelectedAction] = useState(
+    PERMISSION_ACTIONS[0]?.value ?? "",
+  );
 
   const generatedKey = useMemo(
-    () => `${selectedModule}.${selectedAction}.${selectedScope}`,
-    [selectedAction, selectedModule, selectedScope],
+    () => `${selectedModule}:${selectedAction}`,
+    [selectedAction, selectedModule],
   );
 
   const handleSubmit = async (event) => {
@@ -32,8 +35,7 @@ function PermissionEditor() {
 
     const moduleName = String(formData.get("module") ?? "").trim();
     const actionName = String(formData.get("action") ?? "").trim();
-    const scopeName = String(formData.get("scope") ?? "").trim();
-    const baseKey = `${moduleName}.${actionName}.${scopeName}`;
+    const baseKey = `${moduleName}:${actionName}`;
     const extraPermissionsRaw = String(formData.get("extraKeys") ?? "");
     const extraPermissions = extraPermissionsRaw
       .split(",")
@@ -54,7 +56,6 @@ function PermissionEditor() {
         key: baseKey,
         module: moduleName,
         action: actionName,
-        scope: scopeName,
         keys: mergedPermissions,
         description: formData.get("description") ?? "",
       }).unwrap();
@@ -80,7 +81,7 @@ function PermissionEditor() {
           className="permission-editor__back"
           onClick={() => navigate("/permissions")}
         >
-          ← Permissions
+          <ArrowLeft size={16}/> Permissions
         </button>
       </div>
       <header className="rbac-page__header">
@@ -101,9 +102,9 @@ function PermissionEditor() {
               value={selectedModule}
               onChange={(event) => setSelectedModule(event.target.value)}
             >
-              {PERMISSION_MODULES.map((moduleName) => (
-                <option key={moduleName} value={moduleName}>
-                  {moduleName}
+              {PERMISSION_MODULES.map((module) => (
+                <option key={module.value} value={module.value}>
+                  {module.label}
                 </option>
               ))}
             </select>
@@ -120,15 +121,15 @@ function PermissionEditor() {
               value={selectedAction}
               onChange={(event) => setSelectedAction(event.target.value)}
             >
-              {PERMISSION_ACTIONS.map((actionName) => (
-                <option key={actionName} value={actionName}>
-                  {actionName}
+              {PERMISSION_ACTIONS.map((action) => (
+                <option key={action.value} value={action.value}>
+                  {action.label}
                 </option>
               ))}
             </select>
           </label>
 
-          <label
+          {/* <label
             className="permission-editor__field"
             htmlFor="permission-editor-scope"
           >
@@ -145,7 +146,7 @@ function PermissionEditor() {
                 </option>
               ))}
             </select>
-          </label>
+          </label> */}
 
           <label
             className="permission-editor__field permission-editor__field--full"
@@ -160,7 +161,7 @@ function PermissionEditor() {
             />
           </label>
 
-          <label
+          {/* <label
             className="permission-editor__field permission-editor__field--full"
             htmlFor="permission-editor-description"
           >
@@ -171,9 +172,9 @@ function PermissionEditor() {
               rows={4}
               placeholder="What this permission allows..."
             />
-          </label>
+          </label> */}
 
-          <label
+          {/* <label
             className="permission-editor__field permission-editor__field--full"
             htmlFor="permission-editor-extra-keys"
           >
@@ -185,7 +186,7 @@ function PermissionEditor() {
               placeholder="Add extra keys, comma separated"
             />
             <small>Example: user.read.all, audit.manage.org</small>
-          </label>
+          </label> */}
         </div>
 
         <footer className="permission-editor__actions">
